@@ -3,7 +3,10 @@ open Base
 type t =
   | Arrow of [ `no_label | `labelled of string | `optional of string ] * t * t
   | Tuple of t list
-  | Constr of string
+  | Constr0 of string
+  | Constr1 of string * t
+
+let supported_constr1 = Set.of_list (module String) [ "list"; "array" ]
 
 let of_type_desc type_desc =
   let open Or_error.Let_syntax in
@@ -33,14 +36,33 @@ let of_type_desc type_desc =
       let%bind e1 = walk e1.desc in
       let%bind e2 = walk e2.desc in
       Ok (Arrow (kind, e1, e2))
-    | Tconstr (constr, _, _) -> Ok (Constr (Path.name constr))
+    | Tconstr (constr, [], _) -> Ok (Constr0 (Path.name constr))
+    | Tconstr (constr, [ param ], _) ->
+      let%bind param = walk param.desc in
+      let last = Path.last constr in
+      if Set.mem supported_constr1 last
+      then Ok (Constr1 (last, param))
+      else Or_error.errorf "not handled: type constructor %s" last
+    | Tconstr (constr, _ :: _ :: _, _) ->
+      Or_error.errorf
+        "not handled: constructor with more than one parameter %s"
+        (Path.name constr)
   in
   walk type_desc
 
 let to_string t =
   let rec walk = function
     | Tuple ts -> List.map ts ~f:walk |> String.concat ~sep:", " |> Printf.sprintf "(%s)"
-    | Constr name -> name
+    | Constr0 name -> name
+    | Constr1 (name, param) ->
+      let add_parenthesis =
+        match param with
+        | Tuple _ | Arrow _ -> true
+        | Constr0 _ | Constr1 _ -> false
+      in
+      if add_parenthesis
+      then Printf.sprintf "(%s) %s" (walk param) name
+      else Printf.sprintf "%s %s" (walk param) name
     | Arrow (_, lhs, rhs) -> Printf.sprintf "%s -> %s" (walk lhs) (walk rhs)
   in
   walk t

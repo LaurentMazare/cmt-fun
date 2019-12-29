@@ -32,11 +32,14 @@ let rec print_sign : string -> Types.signature_item -> unit =
     Stdio.printf "%sclasstype %s\n%!" indent (Ident.name ident)
 
 let () =
-  let cmi_infos, cmt_infos = Cmt_format.read "core__Core_date.cmti" in
-  Stdio.printf "cmt loaded\n%!";
-  Option.iter cmi_infos ~f:(fun cmi_infos ->
-      Stdio.printf "cmi_name %s\n%!" cmi_infos.cmi_name;
-      Stdio.printf "cmi_sign %d\n%!" (List.length cmi_infos.cmi_sign);
-      List.iter cmi_infos.cmi_sign ~f:(print_sign "  "));
-  Option.iter cmt_infos ~f:(fun cmt_infos ->
-      Stdio.printf "cmt_name %s\n%!" cmt_infos.cmt_modname)
+  match Sys.get_argv () with
+  | [| _; cmt_name |] ->
+    let cmi_infos, cmt_infos = Cmt_format.read cmt_name in
+    Stdio.printf "cmt loaded\n%!";
+    Option.iter cmi_infos ~f:(fun cmi_infos ->
+        Stdio.printf "cmi_name %s\n%!" cmi_infos.cmi_name;
+        Stdio.printf "cmi_sign %d\n%!" (List.length cmi_infos.cmi_sign);
+        List.iter cmi_infos.cmi_sign ~f:(print_sign "  "));
+    Option.iter cmt_infos ~f:(fun cmt_infos ->
+        Stdio.printf "cmt_name %s\n%!" cmt_infos.cmt_modname)
+  | _ -> Printf.failwithf "usage: cmt_test.exe example.cmt" ()
