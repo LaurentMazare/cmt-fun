@@ -1,9 +1,18 @@
 open! Base
+module Simple_type = Cmt_python.Simple_type
 
 let rec print_sign : string -> Types.signature_item -> unit =
  fun indent s ->
   match s with
-  | Sig_value (ident, _, _) -> Stdio.printf "%svalue %s\n%!" indent (Ident.name ident)
+  | Sig_value (ident, value_description, Exported) ->
+    let simple_type = Simple_type.of_type_desc value_description.val_type.desc in
+    let simple_type =
+      match simple_type with
+      | Ok simple_type -> Simple_type.to_string simple_type
+      | Error err -> Error.to_string_mach err
+    in
+    Stdio.printf "%svalue %s: %s\n%!" indent (Ident.name ident) simple_type
+  | Sig_value (_ident, _value_description, Hidden) -> ()
   | Sig_type (ident, _, _, _) -> Stdio.printf "%stype %s\n%!" indent (Ident.name ident)
   | Sig_typext (ident, _, _, _) ->
     Stdio.printf "%stypext %s\n%!" indent (Ident.name ident)
