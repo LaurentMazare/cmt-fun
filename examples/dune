@@ -1,0 +1,5 @@
+(executable
+  (name cmt_test)
+  (libraries base stdio compiler-libs.optcomp)
+  (preprocess (pps ppx_let))
+)
