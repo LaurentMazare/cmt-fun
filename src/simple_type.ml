@@ -1,14 +1,32 @@
 open Base
 
+module Arg = struct
+  type t = Asttypes.arg_label =
+    | Nolabel
+    | Labelled of string
+    | Optional of string
+end
+
 type t =
-  | Arrow of [ `no_label | `labelled of string | `optional of string ] * t * t
+  | Arrow of Arg.t * t * t
   | Tuple of t list
   | Constr0 of string
   | Constr1 of string * t
 
 (* Assume that the following typenames are never shadowed by something different. *)
-let basic_constr0 = Set.of_list (module String) [ "int"; "bool"; "string"; "float" ]
+let basic_constr0 =
+  Set.of_list (module String) [ "int"; "bool"; "string"; "float"; "unit" ]
+
 let supported_constr1 = Set.of_list (module String) [ "list"; "array" ]
+
+let python_of_ml t =
+  let rec walk = function
+    | Arrow _ -> failwith "TODO"
+    | Tuple _ -> "python_of_tuple"
+    | Constr0 constr -> "python_of_" ^ constr
+    | Constr1 (constr, t) -> Printf.sprintf "(python_of_%s %s)" constr (walk t)
+  in
+  walk t
 
 let of_type_desc type_desc =
   let open Or_error.Let_syntax in
@@ -29,12 +47,6 @@ let of_type_desc type_desc =
       |> Or_error.all
       |> Or_error.map ~f:(fun ts -> Tuple ts)
     | Tarrow (kind, e1, e2, _) ->
-      let kind =
-        match kind with
-        | Nolabel -> `no_label
-        | Labelled s -> `labelled s
-        | Optional s -> `optional s
-      in
       let%bind e1 = walk e1.desc in
       let%bind e2 = walk e2.desc in
       Ok (Arrow (kind, e1, e2))
@@ -72,3 +84,11 @@ let to_string t =
     | Arrow (_, lhs, rhs) -> Printf.sprintf "%s -> %s" (walk lhs) (walk rhs)
   in
   walk t
+
+let uncurrify t =
+  let rec walk acc t =
+    match t with
+    | Arrow (arg, t1, t2) -> walk ((arg, t1) :: acc) t2
+    | Tuple _ | Constr0 _ | Constr1 _ -> List.rev acc, t
+  in
+  walk [] t

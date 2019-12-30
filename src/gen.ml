@@ -51,13 +51,19 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
       let simple_type = Simple_type.of_type_desc value_description.val_type.desc in
       (match simple_type with
       | Ok simple_type ->
-        pr
-          "let %s () = (* %s *)"
-          (Ident.name ident |> python_name)
-          (Simple_type.to_string simple_type);
-        pr "  let%%map_open %s = positional \"%s\" %s" "foo" "bar" "baz";
-        pr "  in";
-        pr "  %s" (Ident.name ident |> ocaml_name);
+        let python_name = Ident.name ident |> python_name in
+        let ocaml_name = Ident.name ident |> ocaml_name in
+        pr "let %s () = (* %s *)" python_name (Simple_type.to_string simple_type);
+        (match Simple_type.uncurrify simple_type with
+        | (_ :: _ as _args), _result ->
+          pr "  let%%map_open %s = positional \"%s\" %s" "foo" "bar" "baz";
+          pr "  in";
+          pr "  %s" ocaml_name
+        | [], _ ->
+          pr
+            "  no_arg (fun () -> %s |> %s)"
+            ocaml_name
+            (Simple_type.python_of_ml simple_type));
         pr ";;";
         pr ""
       | Error _err -> ())
