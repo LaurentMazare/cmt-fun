@@ -18,17 +18,18 @@ let do_not_gen_modules =
     ]
 
 let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
+  let pr ~indent s =
+    Printf.ksprintf
+      (fun line ->
+        for _i = 1 to indent * 2 do
+          Out_channel.output_char outc ' '
+        done;
+        Out_channel.output_string outc line;
+        Out_channel.output_char outc '\n')
+      s
+  in
   let rec walk ~indent ~path (s : Types.signature_item) =
-    let pr s =
-      Printf.ksprintf
-        (fun line ->
-          for _i = 1 to indent * 2 do
-            Out_channel.output_char outc ' '
-          done;
-          Out_channel.output_string outc line;
-          Out_channel.output_char outc '\n')
-        s
-    in
+    let pr s = pr ~indent s in
     match s with
     | Sig_value (ident, value_description, Exported) ->
       let simple_type = Simple_type.of_type_desc value_description.val_type.desc in
@@ -74,4 +75,10 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
     | Sig_class (_ident, _, _, _) -> ()
     | Sig_class_type (_ident, _, _, _) -> ()
   in
+  let pr s = pr ~indent:0 s in
+  pr "(* THIS CODE IS GENERATED AUTOMATICALLY, DO NOT EDIT BY HAND *)";
+  pr "open! Base";
+  pr "open! Python_lib";
+  pr "open! Python_lib.Let_syntax";
+  pr "";
   List.iter cmi_infos.cmi_sign ~f:(walk ~indent:0 ~path:[ cmi_infos.cmi_name ])
