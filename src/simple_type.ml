@@ -6,6 +6,8 @@ type t =
   | Constr0 of string
   | Constr1 of string * t
 
+(* Assume that the following typenames are never shadowed by something different. *)
+let basic_constr0 = Set.of_list (module String) [ "int"; "bool"; "string"; "float" ]
 let supported_constr1 = Set.of_list (module String) [ "list"; "array" ]
 
 let of_type_desc type_desc =
@@ -36,7 +38,11 @@ let of_type_desc type_desc =
       let%bind e1 = walk e1.desc in
       let%bind e2 = walk e2.desc in
       Ok (Arrow (kind, e1, e2))
-    | Tconstr (constr, [], _) -> Ok (Constr0 (Path.name constr))
+    | Tconstr (constr, [], _) ->
+      let last = Path.last constr in
+      if Set.mem basic_constr0 last
+      then Ok (Constr0 last)
+      else Ok (Constr0 (Path.name constr))
     | Tconstr (constr, [ param ], _) ->
       let%bind param = walk param.desc in
       let last = Path.last constr in
