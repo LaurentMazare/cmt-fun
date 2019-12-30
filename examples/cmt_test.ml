@@ -33,13 +33,15 @@ let rec print_sign : string -> Types.signature_item -> unit =
 
 let () =
   match Sys.get_argv () with
-  | [| _; cmt_name |] ->
+  | [| _; cmt_name; out_ml |] ->
     let cmi_infos, cmt_infos = Cmt_format.read cmt_name in
     Stdio.printf "cmt loaded\n%!";
     Option.iter cmi_infos ~f:(fun cmi_infos ->
+        Stdio.Out_channel.with_file out_ml ~f:(fun outc ->
+            Cmt_python.Gen.write_ml outc cmi_infos);
         Stdio.printf "cmi_name %s\n%!" cmi_infos.cmi_name;
         Stdio.printf "cmi_sign %d\n%!" (List.length cmi_infos.cmi_sign);
         List.iter cmi_infos.cmi_sign ~f:(print_sign "  "));
     Option.iter cmt_infos ~f:(fun cmt_infos ->
         Stdio.printf "cmt_name %s\n%!" cmt_infos.cmt_modname)
-  | _ -> Printf.failwithf "usage: cmt_test.exe example.cmt" ()
+  | _ -> Printf.failwithf "usage: cmt_test.exe example.cmti out.ml" ()
