@@ -55,10 +55,16 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
         let ocaml_name = Ident.name ident |> ocaml_name in
         pr "let %s () = (* %s *)" python_name (Simple_type.to_string simple_type);
         (match Simple_type.uncurrify simple_type with
-        | (_ :: _ as _args), _result ->
-          pr "  let%%map_open %s = positional \"%s\" %s" "foo" "bar" "baz";
+        | (_ :: _ as args), result ->
+          pr "  let%%map_open";
+          List.map args ~f:(fun (_arg, _t) ->
+              Printf.sprintf "    %s = positional \"%s\" %s" "foo" "bar" "baz")
+          |> String.concat ~sep:" and\n"
+          |> pr "%s";
           pr "  in";
-          pr "  %s" ocaml_name
+          pr "  %s" ocaml_name;
+          List.iter args ~f:(fun (_arg, _t) -> pr "    foo");
+          pr "  |> %s" (Simple_type.python_of_ml result)
         | [], _ ->
           pr
             "  no_arg (fun () -> %s |> %s)"
