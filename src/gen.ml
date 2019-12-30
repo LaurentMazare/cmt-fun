@@ -17,6 +17,22 @@ let do_not_gen_modules =
     ; "Private"
     ]
 
+let ops =
+  Map.of_alist_exn
+    (module String)
+    [ "<=", "lowereq"
+    ; ">=", "greatereq"
+    ; "<", "lower"
+    ; ">", "greater"
+    ; "=", "eq"
+    ; "<>", "neq"
+    ; "==", "physeq"
+    ; "!=", "nphyseq"
+    ]
+
+let python_name s = Map.find ops s |> Option.value ~default:s
+let ocaml_name s = if Map.mem ops s then "(" ^ s ^ ")" else s
+
 let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
   let pr ~indent s =
     Printf.ksprintf
@@ -36,9 +52,14 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
       (match simple_type with
       | Ok simple_type ->
         pr
-          "let %s : %s = assert false"
-          (Ident.name ident)
-          (Simple_type.to_string simple_type)
+          "let %s () = (* %s *)"
+          (Ident.name ident |> python_name)
+          (Simple_type.to_string simple_type);
+        pr "  let%%map_open %s = positional \"%s\" %s" "foo" "bar" "baz";
+        pr "  in";
+        pr "  %s" (Ident.name ident |> ocaml_name);
+        pr ";;";
+        pr ""
       | Error _err -> ())
     | Sig_value (_ident, _value_description, Hidden) -> ()
     | Sig_type (ident, _, _, _) ->
@@ -56,6 +77,12 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
         pr "  let capsule = lazy (Py.Capsule.make \"%s\") in" ident_with_path;
         pr "  (fun x -> (Lazy.force capsule |> fst) x),";
         pr "  (fun x -> (Lazy.force capsule |> snd) x)";
+        pr ";;";
+        pr "let param_%s =" ident;
+        pr
+          "  Defunc.Of_python.create ~type_name:\"%s\" ~conv:%s_of_python"
+          ident_with_path
+          ident;
         pr ";;";
         pr "")
     | Sig_typext (_ident, _, _, _) -> ()
