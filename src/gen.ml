@@ -57,13 +57,29 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
         (match Simple_type.uncurrify simple_type with
         | (_ :: _ as args), result ->
           pr "  let%%map_open";
-          List.map args ~f:(fun (_arg, _t) ->
-              Printf.sprintf "    %s = positional \"%s\" %s" "foo" "bar" "baz")
+          let args =
+            List.map args ~f:(fun (arg, t) ->
+                let name =
+                  match arg with
+                  | Nolabel -> "todo"
+                  | Labelled l -> l
+                  | Optional l -> l
+                in
+                name, arg, t)
+          in
+          List.map args ~f:(fun (name, arg, _t) ->
+              let kind =
+                match arg with
+                | Nolabel -> "positional"
+                | Labelled _ -> "keyword"
+                | Optional _ -> "keyword_opt"
+              in
+              Printf.sprintf "    %s = %s \"%s\" %s" name kind name "param_baz")
           |> String.concat ~sep:" and\n"
           |> pr "%s";
           pr "  in";
           pr "  %s" ocaml_name;
-          List.iter args ~f:(fun (_arg, _t) -> pr "    foo");
+          List.iter args ~f:(fun (name, _arg, _t) -> pr "    %s" name);
           pr "  |> %s" (Simple_type.python_of_ml result)
         | [], _ ->
           pr

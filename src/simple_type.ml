@@ -20,11 +20,12 @@ let basic_constr0 =
 let supported_constr1 = Set.of_list (module String) [ "list"; "array" ]
 
 let python_of_ml t =
+  let escape str = String.tr str ~target:'.' ~replacement:'_' |> String.lowercase in
   let rec walk = function
     | Arrow _ -> failwith "TODO"
-    | Tuple _ -> "python_of_tuple"
-    | Constr0 constr -> "python_of_" ^ constr
-    | Constr1 (constr, t) -> Printf.sprintf "(python_of_%s %s)" constr (walk t)
+    | Tuple _ -> "python_of_tuple TODO"
+    | Constr0 constr -> "python_of_" ^ escape constr
+    | Constr1 (constr, t) -> Printf.sprintf "(python_of_%s %s)" (escape constr) (walk t)
   in
   walk t
 
