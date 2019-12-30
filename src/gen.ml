@@ -52,7 +52,7 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
         pr "";
         pr "type %s = %s;;" ident ident_with_path;
         pr "let python_of_%s, %s_of_python =" ident ident;
-        pr "  let capsule = lazy (Py.Capsule.make \"ident_with_path\") in";
+        pr "  let capsule = lazy (Py.Capsule.make \"%s\") in" ident_with_path;
         pr "  (fun x -> (Lazy.force capsule |> fst) x),";
         pr "  (fun x -> (Lazy.force capsule |> snd) x)";
         pr ";;";
@@ -74,4 +74,4 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
     | Sig_class (_ident, _, _, _) -> ()
     | Sig_class_type (_ident, _, _, _) -> ()
   in
-  List.iter cmi_infos.cmi_sign ~f:(walk ~indent:0 ~path:[ "M" ])
+  List.iter cmi_infos.cmi_sign ~f:(walk ~indent:0 ~path:[ cmi_infos.cmi_name ])
