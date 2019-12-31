@@ -8,10 +8,13 @@ module Arg = struct
 end
 
 type t =
+  | Atom of string
+  | Tuple2 of t * t
+  | Tuple3 of t * t * t
+  | Tuple4 of t * t * t * t
+  | Tuple5 of t * t * t * t * t
   | Arrow of Arg.t * t * t
-  | Tuple of t list
-  | Constr0 of string
-  | Constr1 of string * t
+  | Apply of t * string
 
 (* Assume that the following typenames are never shadowed by something different. *)
 let basic_constr0 =
@@ -23,9 +26,18 @@ let python_of_ml t =
   let escape str = String.tr str ~target:'.' ~replacement:'_' |> String.lowercase in
   let rec walk = function
     | Arrow _ -> failwith "TODO"
-    | Tuple _ -> "python_of_tuple TODO"
-    | Constr0 constr -> "python_of_" ^ escape constr
-    | Constr1 (constr, t) -> Printf.sprintf "(python_of_%s %s)" (escape constr) (walk t)
+    | Tuple2 (t1, t2) -> tuple [ t1; t2 ]
+    | Tuple3 (t1, t2, t3) -> tuple [ t1; t2; t3 ]
+    | Tuple4 (t1, t2, t3, t4) -> tuple [ t1; t2; t3; t4 ]
+    | Tuple5 (t1, t2, t3, t4, t5) -> tuple [ t1; t2; t3; t4; t5 ]
+    | Atom constr -> "python_of_" ^ escape constr
+    | Apply (t, constr) -> Printf.sprintf "(python_of_%s %s)" (escape constr) (walk t)
+  and tuple ts =
+    let names = List.mapi ts ~f:(fun i t -> Printf.sprintf "t%d" i, t) in
+    Printf.sprintf
+      "(fun (%s) -> Py.Tuple.of_list [%s])"
+      (List.map names ~f:fst |> String.concat ~sep:", ")
+      (List.map names ~f:(fun (name, t) -> walk t ^ " " ^ name) |> String.concat ~sep:"; ")
   in
   walk t
 
@@ -44,23 +56,27 @@ let of_type_desc type_desc =
     | Tlink e -> walk e.desc
     | Tsubst e -> walk e.desc
     | Ttuple es ->
-      List.map es ~f:(fun e -> walk e.desc)
-      |> Or_error.all
-      |> Or_error.map ~f:(fun ts -> Tuple ts)
+      let%bind tuple = List.map es ~f:(fun e -> walk e.desc) |> Or_error.all in
+      (match tuple with
+      | [] -> Or_error.error_string "empty tuple"
+      | [ _ ] -> Or_error.error_string "tuple with a single element"
+      | [ t1; t2 ] -> Ok (Tuple2 (t1, t2))
+      | [ t1; t2; t3 ] -> Ok (Tuple3 (t1, t2, t3))
+      | [ t1; t2; t3; t4 ] -> Ok (Tuple4 (t1, t2, t3, t4))
+      | [ t1; t2; t3; t4; t5 ] -> Ok (Tuple5 (t1, t2, t3, t4, t5))
+      | _ -> Or_error.errorf "tuple with too many elements (%d)" (List.length tuple))
     | Tarrow (kind, e1, e2, _) ->
       let%bind e1 = walk e1.desc in
       let%bind e2 = walk e2.desc in
       Ok (Arrow (kind, e1, e2))
     | Tconstr (constr, [], _) ->
       let last = Path.last constr in
-      if Set.mem basic_constr0 last
-      then Ok (Constr0 last)
-      else Ok (Constr0 (Path.name constr))
+      if Set.mem basic_constr0 last then Ok (Atom last) else Ok (Atom (Path.name constr))
     | Tconstr (constr, [ param ], _) ->
       let%bind param = walk param.desc in
       let last = Path.last constr in
       if Set.mem supported_constr1 last
-      then Ok (Constr1 (last, param))
+      then Ok (Apply (param, last))
       else Or_error.errorf "not handled: type constructor %s" last
     | Tconstr (constr, _ :: _ :: _, _) ->
       Or_error.errorf
@@ -71,18 +87,23 @@ let of_type_desc type_desc =
 
 let to_string t =
   let rec walk = function
-    | Tuple ts -> List.map ts ~f:walk |> String.concat ~sep:", " |> Printf.sprintf "(%s)"
-    | Constr0 name -> name
-    | Constr1 (name, param) ->
+    | Tuple2 (t1, t2) -> tuple [ t1; t2 ]
+    | Tuple3 (t1, t2, t3) -> tuple [ t1; t2; t3 ]
+    | Tuple4 (t1, t2, t3, t4) -> tuple [ t1; t2; t3; t4 ]
+    | Tuple5 (t1, t2, t3, t4, t5) -> tuple [ t1; t2; t3; t4; t5 ]
+    | Atom name -> name
+    | Apply (param, name) ->
       let add_parenthesis =
         match param with
-        | Tuple _ | Arrow _ -> true
-        | Constr0 _ | Constr1 _ -> false
+        | Tuple2 _ | Tuple3 _ | Tuple4 _ | Tuple5 _ | Arrow _ -> true
+        | Atom _ | Apply _ -> false
       in
       if add_parenthesis
       then Printf.sprintf "(%s) %s" (walk param) name
       else Printf.sprintf "%s %s" (walk param) name
     | Arrow (_, lhs, rhs) -> Printf.sprintf "%s -> %s" (walk lhs) (walk rhs)
+  and tuple ts =
+    List.map ts ~f:walk |> String.concat ~sep:", " |> Printf.sprintf "(%s)"
   in
   walk t
 
@@ -90,6 +111,6 @@ let uncurrify t =
   let rec walk acc t =
     match t with
     | Arrow (arg, t1, t2) -> walk ((arg, t1) :: acc) t2
-    | Tuple _ | Constr0 _ | Constr1 _ -> List.rev acc, t
+    | Tuple2 _ | Tuple3 _ | Tuple4 _ | Tuple5 _ | Atom _ | Apply _ -> List.rev acc, t
   in
   walk [] t
