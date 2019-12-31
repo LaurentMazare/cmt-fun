@@ -67,14 +67,19 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
                 in
                 name, arg, t)
           in
-          List.map args ~f:(fun (name, arg, _t) ->
+          List.map args ~f:(fun (name, arg, t) ->
               let kind =
                 match arg with
                 | Nolabel -> "positional"
                 | Labelled _ -> "keyword"
                 | Optional _ -> "keyword_opt"
               in
-              Printf.sprintf "    %s = %s \"%s\" %s" name kind name "param_todo")
+              let param =
+                match t with
+                | Atom a -> "param_" ^ a
+                | _ -> "pyobject"
+              in
+              Printf.sprintf "    %s = %s \"%s\" %s" name kind name param)
           |> String.concat ~sep:" and\n"
           |> pr "%s";
           pr "  in";

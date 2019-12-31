@@ -86,6 +86,10 @@ let of_type_desc type_desc =
   walk type_desc
 
 let to_string t =
+  let need_parenthesis = function
+    | Tuple2 _ | Tuple3 _ | Tuple4 _ | Tuple5 _ | Arrow _ -> true
+    | Atom _ | Apply _ -> false
+  in
   let rec walk = function
     | Tuple2 (t1, t2) -> tuple [ t1; t2 ]
     | Tuple3 (t1, t2, t3) -> tuple [ t1; t2; t3 ]
@@ -93,15 +97,13 @@ let to_string t =
     | Tuple5 (t1, t2, t3, t4, t5) -> tuple [ t1; t2; t3; t4; t5 ]
     | Atom name -> name
     | Apply (param, name) ->
-      let add_parenthesis =
-        match param with
-        | Tuple2 _ | Tuple3 _ | Tuple4 _ | Tuple5 _ | Arrow _ -> true
-        | Atom _ | Apply _ -> false
-      in
-      if add_parenthesis
+      if need_parenthesis param
       then Printf.sprintf "(%s) %s" (walk param) name
       else Printf.sprintf "%s %s" (walk param) name
-    | Arrow (_, lhs, rhs) -> Printf.sprintf "%s -> %s" (walk lhs) (walk rhs)
+    | Arrow (_, lhs, rhs) ->
+      if need_parenthesis lhs
+      then Printf.sprintf "(%s) -> %s" (walk lhs) (walk rhs)
+      else Printf.sprintf "%s -> %s" (walk lhs) (walk rhs)
   and tuple ts =
     List.map ts ~f:walk |> String.concat ~sep:", " |> Printf.sprintf "(%s)"
   in
