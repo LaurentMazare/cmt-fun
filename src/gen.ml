@@ -58,11 +58,11 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
         | (_ :: _ as args), result ->
           pr "  let%%map_open";
           let args =
-            List.map args ~f:(fun (arg, t) ->
+            List.mapi args ~f:(fun i (arg, t) ->
                 let name =
                   match arg with
-                  | Nolabel -> "todo"
-                  | Labelled l -> l
+                  | Nolabel -> "v" ^ Int.to_string (i + 1)
+                  | Labelled l -> l (* TODO: handle potential collisions ? *)
                   | Optional l -> l
                 in
                 name, arg, t)
@@ -74,7 +74,7 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
                 | Labelled _ -> "keyword"
                 | Optional _ -> "keyword_opt"
               in
-              Printf.sprintf "    %s = %s \"%s\" %s" name kind name "param_baz")
+              Printf.sprintf "    %s = %s \"%s\" %s" name kind name "param_todo")
           |> String.concat ~sep:" and\n"
           |> pr "%s";
           pr "  in";
@@ -135,5 +135,11 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
   pr "open! Base";
   pr "open! Python_lib";
   pr "open! Python_lib.Let_syntax";
+  pr "";
+  pr "let protect ~f x =";
+  pr "  try f x with";
+  pr "  | Py.Err _ as err -> raise err";
+  pr "  | exn -> raise (Py.Err (SyntaxError, Exn.to_string exn))";
+  pr ";;";
   pr "";
   List.iter cmi_infos.cmi_sign ~f:(walk ~indent:0 ~path:[ cmi_infos.cmi_name ])
