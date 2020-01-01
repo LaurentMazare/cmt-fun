@@ -58,12 +58,21 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
         | (_ :: _ as args), result ->
           pr "  let%%map_open";
           let args =
+            let unique_name =
+              let already_used_names = Hash_set.create (module String) in
+              fun name ->
+                let rec loop d =
+                  let name = name ^ Int.to_string d in
+                  if Hash_set.mem already_used_names name then loop (d + 1) else name
+                in
+                if Hash_set.mem already_used_names name then loop 1 else name
+            in
             List.mapi args ~f:(fun i (arg, t) ->
                 let name =
                   match arg with
-                  | Nolabel -> "v" ^ Int.to_string (i + 1)
-                  | Labelled l -> l (* TODO: handle potential collisions ? *)
-                  | Optional l -> l
+                  | Nolabel -> "positional_" ^ Int.to_string (i + 1)
+                  | Labelled l -> unique_name l
+                  | Optional l -> unique_name l
                 in
                 name, arg, t)
           in
