@@ -30,6 +30,7 @@ let ops =
     ; "!=", "nphyseq"
     ]
 
+let escape str = String.tr str ~target:'.' ~replacement:'_' |> String.lowercase
 let python_name s = Map.find ops s |> Option.value ~default:s
 let ocaml_name s = if Map.mem ops s then "(" ^ s ^ ")" else s
 
@@ -37,10 +38,12 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
   let pr ~indent s =
     Printf.ksprintf
       (fun line ->
-        for _i = 1 to indent * 2 do
-          Out_channel.output_char outc ' '
-        done;
-        Out_channel.output_string outc line;
+        if not (String.is_empty line)
+        then (
+          for _i = 1 to indent * 2 do
+            Out_channel.output_char outc ' '
+          done;
+          Out_channel.output_string outc line);
         Out_channel.output_char outc '\n')
       s
   in
@@ -48,6 +51,7 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
     let pr s = pr ~indent s in
     match s with
     | Sig_value (ident, value_description, Exported) ->
+      let path_str = List.rev path |> String.concat ~sep:"." in
       let simple_type = Simple_type.of_type_desc value_description.val_type.desc in
       (match simple_type with
       | Ok simple_type ->
@@ -83,21 +87,40 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
                 | Labelled _ -> "keyword"
                 | Optional _ -> "keyword_opt"
               in
-              let param =
-                match t with
-                | Atom a -> "param_" ^ a
+              let rec walk t =
+                match (t : Simple_type.t) with
+                | Atom "int" -> "int"
+                | Atom "string" -> "string"
+                | Atom a -> "param_" ^ escape a
+                | Tuple2 (t1, t2) -> Printf.sprintf "pair (%s) (%s)" (walk t1) (walk t2)
+                | Tuple3 (t1, t2, t3) ->
+                  Printf.sprintf "triple (%s) (%s) (%s)" (walk t1) (walk t2) (walk t3)
                 | _ -> "pyobject"
               in
-              Printf.sprintf "    %s = %s \"%s\" %s" name kind name param)
+              Printf.sprintf
+                "    %s = %s \"%s\" %s ~docstring:\"%s\""
+                name
+                kind
+                name
+                (walk t)
+                (Simple_type.to_string t))
           |> String.concat ~sep:" and\n"
           |> pr "%s";
           pr "  in";
-          pr "  %s" ocaml_name;
-          List.iter args ~f:(fun (name, _arg, _t) -> pr "    %s" name);
+          pr "  %s.%s" path_str ocaml_name;
+          List.iter args ~f:(fun (name, arg, _t) ->
+              let prefix =
+                match arg with
+                | Nolabel -> ""
+                | Labelled _ -> "~"
+                | Optional _ -> "?"
+              in
+              pr "    %s%s" prefix name);
           pr "  |> %s" (Simple_type.python_of_ml result)
         | [], _ ->
           pr
-            "  no_arg (fun () -> %s |> %s)"
+            "  Defunc.no_arg (fun () -> %s.%s |> %s)"
+            path_str
             ocaml_name
             (Simple_type.python_of_ml simple_type));
         pr ";;";
@@ -147,6 +170,7 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
   let pr s = pr ~indent:0 s in
   pr "(* THIS CODE IS GENERATED AUTOMATICALLY, DO NOT EDIT BY HAND *)";
   pr "open! Base";
+  pr "open! Gen_import";
   pr "open! Python_lib";
   pr "open! Python_lib.Let_syntax";
   pr "";
