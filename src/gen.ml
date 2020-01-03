@@ -1,6 +1,12 @@
 open Base
 open Stdio
 
+type t =
+  | Nothing
+  | Function of string
+  | Type of string
+  | Module of string
+
 let do_not_gen_types = Set.of_list (module String) [ "comparator_witness" ]
 let direct_params = Set.of_list (module String) [ "bool"; "int"; "string"; "float" ]
 
@@ -118,8 +124,9 @@ let write_value ident value_description outc ~indent ~path =
         ocaml_name
         (Simple_type.python_of_ml simple_type));
     pr ";;";
-    pr ""
-  | Error _err -> ()
+    pr "";
+    Function python_name
+  | Error _err -> Nothing
 
 let write_type ident outc ~indent ~path =
   let pr s = pr outc ~indent s in
@@ -144,17 +151,21 @@ let write_type ident outc ~indent ~path =
       ident_with_path
       ident;
     pr ";;";
-    pr "")
+    pr "";
+    Type ident)
+  else Nothing
 
-let register_module outc ~indent ~functions ~submodules =
+let register_module ts outc ~indent =
   let pr s = pr outc ~indent s in
   pr "let register_module ~module_name =";
   pr "  let modl = Py_module.create module_name in";
-  List.iter functions ~f:(fun func_name ->
-      pr "  Py_module.set modl \"%s\" (%s ());" func_name func_name);
-  List.iter submodules ~f:(fun sub_name ->
-      pr "  let subm = %s.register_module ~module_name:\"\" in" sub_name;
-      pr "  Py_module.set_value module \"%s\" subm;" sub_name);
+  List.iter ts ~f:(function
+      | Nothing | Type _ -> ()
+      | Function func_name ->
+        pr "  Py_module.set modl \"%s\" (%s ());" func_name func_name
+      | Module sub_name ->
+        pr "  let subm = %s.register_module ~module_name:\"\" in" sub_name;
+        pr "  Py_module.set_value module \"%s\" subm;" sub_name);
   pr "  modl"
 
 let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
@@ -163,26 +174,28 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
     match s with
     | Sig_value (ident, value_description, Exported) ->
       write_value ident value_description outc ~indent ~path
-    | Sig_value (_ident, _value_description, Hidden) -> ()
+    | Sig_value (_ident, _value_description, Hidden) -> Nothing
     | Sig_type (ident, _, _, _) -> write_type ident outc ~indent ~path
-    | Sig_typext (_ident, _, _, _) -> ()
+    | Sig_typext (_ident, _, _, _) -> Nothing
     | Sig_module (ident, _, module_declaration, _, _) ->
       (match module_declaration.md_type with
-      | Mty_ident _path -> ()
       | Mty_signature signature ->
         let ident = Ident.name ident in
         if not (Set.mem do_not_gen_modules ident)
         then (
           pr "module %s = struct" ident;
-          List.iter signature ~f:(walk ~indent:(indent + 1) ~path:(ident :: path));
+          let ts =
+            List.map signature ~f:(walk ~indent:(indent + 1) ~path:(ident :: path))
+          in
           pr "";
-          register_module outc ~indent:(indent + 1) ~functions:[] ~submodules:[];
-          pr "end;;")
-      | Mty_functor (_, _, _) -> ()
-      | Mty_alias _ -> ())
-    | Sig_modtype (_ident, _, _) -> ()
-    | Sig_class (_ident, _, _, _) -> ()
-    | Sig_class_type (_ident, _, _, _) -> ()
+          register_module ts outc ~indent:(indent + 1);
+          pr "end;;";
+          Module ident)
+        else Nothing
+      | Mty_ident _ | Mty_functor (_, _, _) | Mty_alias _ -> Nothing)
+    | Sig_modtype (_ident, _, _)
+    | Sig_class (_ident, _, _, _)
+    | Sig_class_type (_ident, _, _, _) -> Nothing
   in
   let pr s = pr outc ~indent:0 s in
   pr "(* THIS CODE IS GENERATED AUTOMATICALLY, DO NOT EDIT BY HAND *)";
@@ -197,6 +210,6 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
   pr "  | exn -> raise (Py.Err (SyntaxError, Exn.to_string exn))";
   pr ";;";
   pr "";
-  List.iter cmi_infos.cmi_sign ~f:(walk ~indent:0 ~path:[ cmi_infos.cmi_name ]);
+  let ts = List.map cmi_infos.cmi_sign ~f:(walk ~indent:0 ~path:[ cmi_infos.cmi_name ]) in
   pr "";
-  register_module outc ~indent:0 ~functions:[] ~submodules:[]
+  register_module ts outc ~indent:0
