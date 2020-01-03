@@ -146,6 +146,17 @@ let write_type ident outc ~indent ~path =
     pr ";;";
     pr "")
 
+let register_module outc ~indent ~functions ~submodules =
+  let pr s = pr outc ~indent s in
+  pr "let register_module ~module_name =";
+  pr "  let modl = Py_module.create module_name in";
+  List.iter functions ~f:(fun func_name ->
+      pr "  Py_module.set modl \"%s\" (%s ());" func_name func_name);
+  List.iter submodules ~f:(fun sub_name ->
+      pr "  let subm = %s.register_module ~module_name:\"\" in" sub_name;
+      pr "  Py_module.set_value module \"%s\" subm;" sub_name);
+  pr "  modl"
+
 let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
   let rec walk ~indent ~path (s : Types.signature_item) =
     let pr s = pr outc ~indent s in
@@ -164,6 +175,8 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
         then (
           pr "module %s = struct" ident;
           List.iter signature ~f:(walk ~indent:(indent + 1) ~path:(ident :: path));
+          pr "";
+          register_module outc ~indent:(indent + 1) ~functions:[] ~submodules:[];
           pr "end;;")
       | Mty_functor (_, _, _) -> ()
       | Mty_alias _ -> ())
@@ -184,4 +197,6 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
   pr "  | exn -> raise (Py.Err (SyntaxError, Exn.to_string exn))";
   pr ";;";
   pr "";
-  List.iter cmi_infos.cmi_sign ~f:(walk ~indent:0 ~path:[ cmi_infos.cmi_name ])
+  List.iter cmi_infos.cmi_sign ~f:(walk ~indent:0 ~path:[ cmi_infos.cmi_name ]);
+  pr "";
+  register_module outc ~indent:0 ~functions:[] ~submodules:[]
