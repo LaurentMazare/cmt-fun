@@ -5,7 +5,10 @@ type t =
   | Nothing
   | Function of string
   | Type of string
-  | Module of string
+  | Module of
+      { ml_module_name : string
+      ; path : string list
+      }
 
 let do_not_gen_types = Set.of_list (module String) [ "comparator_witness" ]
 let direct_params = Set.of_list (module String) [ "bool"; "int"; "string"; "float" ]
@@ -163,9 +166,15 @@ let register_module ts outc ~indent =
       | Nothing | Type _ -> ()
       | Function func_name ->
         pr "  Py_module.set modl \"%s\" (%s ());" func_name func_name
-      | Module sub_name ->
-        pr "  let subm = %s.register_module ~module_name:\"\" in" sub_name;
-        pr "  Py_module.set_value module \"%s\" subm;" sub_name);
+      | Module { ml_module_name; path } ->
+        let python_module_name =
+          List.rev (ml_module_name :: path) |> String.concat ~sep:"__" |> String.lowercase
+        in
+        pr
+          "  let subm = %s.register_module ~module_name:\"%s\" in"
+          ml_module_name
+          python_module_name;
+        pr "  Py_module.set_value module \"%s\" subm;" (String.lowercase ml_module_name));
   pr "  modl"
 
 let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
@@ -190,7 +199,7 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
           pr "";
           register_module ts outc ~indent:(indent + 1);
           pr "end;;";
-          Module ident)
+          Module { ml_module_name = ident; path })
         else Nothing
       | Mty_ident _ | Mty_functor (_, _, _) | Mty_alias _ -> Nothing)
     | Sig_modtype (_ident, _, _)
