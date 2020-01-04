@@ -38,6 +38,19 @@ let ops =
     ; "<>", "neq"
     ; "==", "physeq"
     ; "!=", "nphyseq"
+    ; "<=.", "lowereq_approx"
+    ; ">=.", "greatereq_approx"
+    ; "<.", "lower_approx"
+    ; ">.", "greater_approx"
+    ; "=.", "eq_approx"
+    ; "<>.", "neq_approx"
+    ; "==.", "physeq_approx"
+    ; "!=.", "nphyseq_approx"
+    ; "+", "plus"
+    ; "-", "minus"
+    ; "*", "times"
+    ; "/", "divide"
+    ; "//", "divide_"
     ]
 
 let escape str = String.tr str ~target:'.' ~replacement:'_' |> String.lowercase
@@ -174,7 +187,7 @@ let register_module ts outc ~indent =
           "  let subm = %s.register_module ~module_name:\"%s\" in"
           ml_module_name
           python_module_name;
-        pr "  Py_module.set_value module \"%s\" subm;" (String.lowercase ml_module_name));
+        pr "  Py_module.set_value modl \"%s\" subm;" (String.lowercase ml_module_name));
   pr "  modl"
 
 let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
@@ -209,9 +222,9 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
   let pr s = pr outc ~indent:0 s in
   pr "(* THIS CODE IS GENERATED AUTOMATICALLY, DO NOT EDIT BY HAND *)";
   pr "open! Base";
-  pr "open! Gen_import";
   pr "open! Python_lib";
   pr "open! Python_lib.Let_syntax";
+  pr "open! Gen_import";
   pr "";
   pr "let protect ~f x =";
   pr "  try f x with";

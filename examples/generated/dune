@@ -1,0 +1,6 @@
+(executables
+ (names ocaml)
+ (preprocess (pps ppx_let ppx_python))
+ (modes (byte shared_object))
+ (flags :standard -linkall)
+ (libraries base core pyml pythonlib))
