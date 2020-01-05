@@ -12,7 +12,7 @@ let protect ~f x =
 
 module Span = struct
   let bin_shape_t () = (* Bin_prot.Shape.t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Span.bin_shape_t |> python_of_bin_prot_shape_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Span.bin_shape_t |> python_of_bin_prot__shape__t)
   ;;
 
   let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
@@ -21,7 +21,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.t_of_sexp
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let sexp_of_t () = (* t -> Sexplib0.Sexp.t *)
@@ -30,7 +30,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.sexp_of_t
       positional_1
-    |> python_of_sexplib0_sexp_t
+    |> python_of_sexplib0__sexp__t
   ;;
 
   module Parts = struct
@@ -51,7 +51,7 @@ module Span = struct
       in
       Core__Core_time_float.Span.Parts.t_of_sexp
         positional_1
-      |> python_of_t
+      |> python_of_core__core_time_float__span__parts__t
     ;;
 
     let sexp_of_t () = (* t -> Sexplib0.Sexp.t *)
@@ -60,7 +60,7 @@ module Span = struct
       in
       Core__Core_time_float.Span.Parts.sexp_of_t
         positional_1
-      |> python_of_sexplib0_sexp_t
+      |> python_of_sexplib0__sexp__t
     ;;
 
 
@@ -167,7 +167,7 @@ module Span = struct
     Core__Core_time_float.Span.min
       positional_1
       positional_2
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let max () = (* t -> t -> t *)
@@ -178,7 +178,7 @@ module Span = struct
     Core__Core_time_float.Span.max
       positional_1
       positional_2
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let ascending () = (* t -> t -> int *)
@@ -226,7 +226,7 @@ module Span = struct
       positional_1
       ~min
       ~max
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let is_positive () = (* t -> bool *)
@@ -271,7 +271,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.sign
       positional_1
-    |> python_of_base___sign0_t
+    |> python_of_base____sign0__t
   ;;
 
   let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Hash.state *)
@@ -282,7 +282,7 @@ module Span = struct
     Core__Core_time_float.Span.hash_fold_t
       positional_1
       positional_2
-    |> python_of_ppx_hash_lib_std_hash_state
+    |> python_of_ppx_hash_lib__std__hash__state
   ;;
 
   let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
@@ -291,7 +291,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.hash
       positional_1
-    |> python_of_ppx_hash_lib_std_hash_hash_value
+    |> python_of_ppx_hash_lib__std__hash__hash_value
   ;;
 
   let pp () = (* Base__.Formatter.t -> t -> unit *)
@@ -397,43 +397,43 @@ module Span = struct
     in
     Core__Core_time_float.Span.of_string
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let nanosecond () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Span.nanosecond |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Span.nanosecond |> python_of_core__core_time_float__span__t)
   ;;
 
   let microsecond () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Span.microsecond |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Span.microsecond |> python_of_core__core_time_float__span__t)
   ;;
 
   let millisecond () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Span.millisecond |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Span.millisecond |> python_of_core__core_time_float__span__t)
   ;;
 
   let second () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Span.second |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Span.second |> python_of_core__core_time_float__span__t)
   ;;
 
   let minute () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Span.minute |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Span.minute |> python_of_core__core_time_float__span__t)
   ;;
 
   let hour () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Span.hour |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Span.hour |> python_of_core__core_time_float__span__t)
   ;;
 
   let day () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Span.day |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Span.day |> python_of_core__core_time_float__span__t)
   ;;
 
   let robust_comparison_tolerance () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Span.robust_comparison_tolerance |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Span.robust_comparison_tolerance |> python_of_core__core_time_float__span__t)
   ;;
 
   let zero () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Span.zero |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Span.zero |> python_of_core__core_time_float__span__t)
   ;;
 
   let to_parts () = (* t -> Parts.t *)
@@ -442,7 +442,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.to_parts
       positional_1
-    |> python_of_parts_t
+    |> python_of_parts__t
   ;;
 
   let of_ns () = (* float -> t *)
@@ -451,7 +451,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.of_ns
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let of_us () = (* float -> t *)
@@ -460,7 +460,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.of_us
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let of_ms () = (* float -> t *)
@@ -469,7 +469,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.of_ms
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let of_sec () = (* float -> t *)
@@ -478,7 +478,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.of_sec
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let of_int_sec () = (* int -> t *)
@@ -487,7 +487,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.of_int_sec
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let of_int32_seconds () = (* Core_kernel__.Int32.t -> t *)
@@ -496,7 +496,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.of_int32_seconds
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let of_int63_seconds () = (* Core_kernel__.Int63.t -> t *)
@@ -505,7 +505,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.of_int63_seconds
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let of_min () = (* float -> t *)
@@ -514,7 +514,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.of_min
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let of_hr () = (* float -> t *)
@@ -523,7 +523,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.of_hr
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let of_day () = (* float -> t *)
@@ -532,7 +532,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.of_day
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let to_ns () = (* t -> float *)
@@ -604,7 +604,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.to_int63_seconds_round_down_exn
       positional_1
-    |> python_of_core_kernel___int63_t
+    |> python_of_core_kernel____int63__t
   ;;
 
   let to_proportional_float () = (* t -> float *)
@@ -624,7 +624,7 @@ module Span = struct
     Core__Core_time_float.Span.(+)
       positional_1
       positional_2
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let minus () = (* t -> t -> t *)
@@ -635,7 +635,7 @@ module Span = struct
     Core__Core_time_float.Span.(-)
       positional_1
       positional_2
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let abs () = (* t -> t *)
@@ -644,7 +644,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.abs
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let neg () = (* t -> t *)
@@ -653,7 +653,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.neg
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let scale () = (* t -> float -> t *)
@@ -664,7 +664,7 @@ module Span = struct
     Core__Core_time_float.Span.scale
       positional_1
       positional_2
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let divide () = (* t -> float -> t *)
@@ -675,7 +675,7 @@ module Span = struct
     Core__Core_time_float.Span.(/)
       positional_1
       positional_2
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let divide_ () = (* t -> t -> float *)
@@ -695,7 +695,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.next
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let prev () = (* t -> t *)
@@ -704,7 +704,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.prev
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let to_short_string () = (* t -> string *)
@@ -722,7 +722,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.to_unit_of_time
       positional_1
-    |> python_of_core_kernel___unit_of_time_t
+    |> python_of_core_kernel____unit_of_time__t
   ;;
 
   let of_unit_of_time () = (* Core_kernel__.Unit_of_time.t -> t *)
@@ -731,7 +731,7 @@ module Span = struct
     in
     Core__Core_time_float.Span.of_unit_of_time
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
   let randomize () = (* t -> Core_kernel__.Percent.t -> t *)
@@ -742,7 +742,7 @@ module Span = struct
     Core__Core_time_float.Span.randomize
       positional_1
       ~percent
-    |> python_of_t
+    |> python_of_core__core_time_float__span__t
   ;;
 
 
@@ -837,7 +837,7 @@ module Zone = struct
     Core__Core_time_float.Zone.input_tz_file
       ~zonename
       ~filename
-    |> python_of_t
+    |> python_of_core__core_time_float__zone__t
   ;;
 
   let of_utc_offset () = (* int -> t *)
@@ -846,11 +846,11 @@ module Zone = struct
     in
     Core__Core_time_float.Zone.of_utc_offset
       ~hours
-    |> python_of_t
+    |> python_of_core__core_time_float__zone__t
   ;;
 
   let utc () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Zone.utc |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Zone.utc |> python_of_core__core_time_float__zone__t)
   ;;
 
   let name () = (* t -> string *)
@@ -878,7 +878,7 @@ module Zone = struct
       in
       Core__Core_time_float.Zone.Index.next
         positional_1
-      |> python_of_t
+      |> python_of_core__core_time_float__zone__index__t
     ;;
 
     let prev () = (* t -> t *)
@@ -887,7 +887,7 @@ module Zone = struct
       in
       Core__Core_time_float.Zone.Index.prev
         positional_1
-      |> python_of_t
+      |> python_of_core__core_time_float__zone__index__t
     ;;
 
 
@@ -905,7 +905,7 @@ module Zone = struct
     Core__Core_time_float.Zone.index
       positional_1
       positional_2
-    |> python_of_index_t
+    |> python_of_index__t
   ;;
 
   let index_of_date_and_ofday () = (* t -> Core__.Import.Time.Date_and_ofday.t -> Index.t *)
@@ -916,7 +916,7 @@ module Zone = struct
     Core__Core_time_float.Zone.index_of_date_and_ofday
       positional_1
       positional_2
-    |> python_of_index_t
+    |> python_of_index__t
   ;;
 
   let index_offset_from_utc_exn () = (* t -> Index.t -> Core__.Import.Time.Span.t *)
@@ -927,7 +927,7 @@ module Zone = struct
     Core__Core_time_float.Zone.index_offset_from_utc_exn
       positional_1
       positional_2
-    |> python_of_core___import_time_span_t
+    |> python_of_core____import__time__span__t
   ;;
 
   let index_abbreviation_exn () = (* t -> Index.t -> string *)
@@ -960,7 +960,7 @@ module Zone = struct
     Core__Core_time_float.Zone.index_prev_clock_shift_time_exn
       positional_1
       positional_2
-    |> python_of_core___import_time_t
+    |> python_of_core____import__time__t
   ;;
 
   let index_prev_clock_shift_amount_exn () = (* t -> Index.t -> Core__.Import.Time.Span.t *)
@@ -971,7 +971,7 @@ module Zone = struct
     Core__Core_time_float.Zone.index_prev_clock_shift_amount_exn
       positional_1
       positional_2
-    |> python_of_core___import_time_span_t
+    |> python_of_core____import__time__span__t
   ;;
 
   let index_has_next_clock_shift () = (* t -> Index.t -> bool *)
@@ -993,7 +993,7 @@ module Zone = struct
     Core__Core_time_float.Zone.index_next_clock_shift_time_exn
       positional_1
       positional_2
-    |> python_of_core___import_time_t
+    |> python_of_core____import__time__t
   ;;
 
   let index_next_clock_shift_amount_exn () = (* t -> Index.t -> Core__.Import.Time.Span.t *)
@@ -1004,7 +1004,7 @@ module Zone = struct
     Core__Core_time_float.Zone.index_next_clock_shift_amount_exn
       positional_1
       positional_2
-    |> python_of_core___import_time_span_t
+    |> python_of_core____import__time__span__t
   ;;
 
   let abbreviation () = (* t -> Core__.Import.Time.t -> string *)
@@ -1026,7 +1026,7 @@ module Zone = struct
     Core__Core_time_float.Zone.absolute_time_of_date_and_ofday
       positional_1
       positional_2
-    |> python_of_core___import_time_t
+    |> python_of_core____import__time__t
   ;;
 
   let date_and_ofday_of_absolute_time () = (* t -> Core__.Import.Time.t -> Core__.Import.Time.Date_and_ofday.t *)
@@ -1037,11 +1037,11 @@ module Zone = struct
     Core__Core_time_float.Zone.date_and_ofday_of_absolute_time
       positional_1
       positional_2
-    |> python_of_core___import_time_date_and_ofday_t
+    |> python_of_core____import__time__date_and_ofday__t
   ;;
 
   let bin_shape_t () = (* Bin_prot.Shape.t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Zone.bin_shape_t |> python_of_bin_prot_shape_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Zone.bin_shape_t |> python_of_bin_prot__shape__t)
   ;;
 
   let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
@@ -1050,7 +1050,7 @@ module Zone = struct
     in
     Core__Core_time_float.Zone.t_of_sexp
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__zone__t
   ;;
 
   let sexp_of_t () = (* t -> Ppx_sexp_conv_lib.Sexp.t *)
@@ -1059,7 +1059,7 @@ module Zone = struct
     in
     Core__Core_time_float.Zone.sexp_of_t
       positional_1
-    |> python_of_ppx_sexp_conv_lib_sexp_t
+    |> python_of_ppx_sexp_conv_lib__sexp__t
   ;;
 
   let of_string () = (* string -> t *)
@@ -1068,7 +1068,7 @@ module Zone = struct
     in
     Core__Core_time_float.Zone.of_string
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__zone__t
   ;;
 
   let to_string () = (* t -> string *)
@@ -1187,7 +1187,7 @@ module Zone = struct
     Core__Core_time_float.Zone.min
       positional_1
       positional_2
-    |> python_of_t
+    |> python_of_core__core_time_float__zone__t
   ;;
 
   let max () = (* t -> t -> t *)
@@ -1198,7 +1198,7 @@ module Zone = struct
     Core__Core_time_float.Zone.max
       positional_1
       positional_2
-    |> python_of_t
+    |> python_of_core__core_time_float__zone__t
   ;;
 
   let ascending () = (* t -> t -> int *)
@@ -1246,7 +1246,7 @@ module Zone = struct
       positional_1
       ~min
       ~max
-    |> python_of_t
+    |> python_of_core__core_time_float__zone__t
   ;;
 
   let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Hash.state *)
@@ -1257,7 +1257,7 @@ module Zone = struct
     Core__Core_time_float.Zone.hash_fold_t
       positional_1
       positional_2
-    |> python_of_ppx_hash_lib_std_hash_state
+    |> python_of_ppx_hash_lib__std__hash__state
   ;;
 
   let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
@@ -1266,7 +1266,7 @@ module Zone = struct
     in
     Core__Core_time_float.Zone.hash
       positional_1
-    |> python_of_ppx_hash_lib_std_hash_hash_value
+    |> python_of_ppx_hash_lib__std__hash__hash_value
   ;;
 
   let find_exn () = (* string -> t *)
@@ -1275,7 +1275,7 @@ module Zone = struct
     in
     Core__Core_time_float.Zone.find_exn
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__zone__t
   ;;
 
   let initialized_zones () = (* unit -> ((string, t)) list *)
@@ -1284,7 +1284,7 @@ module Zone = struct
     in
     Core__Core_time_float.Zone.initialized_zones
       positional_1
-    |> (python_of_list (fun (t0, t1) -> Py.Tuple.of_list [python_of_string t0; python_of_t t1]))
+    |> (python_of_list (fun (t0, t1) -> Py.Tuple.of_list [python_of_string t0; python_of_core__core_time_float__zone__t t1]))
   ;;
 
   let init () = (* unit -> unit *)
@@ -1348,7 +1348,7 @@ module Zone = struct
 end;;
 module Ofday = struct
   let bin_shape_t () = (* Bin_prot.Shape.t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.bin_shape_t |> python_of_bin_prot_shape_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.bin_shape_t |> python_of_bin_prot__shape__t)
   ;;
 
   let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
@@ -1357,7 +1357,7 @@ module Ofday = struct
     in
     Core__Core_time_float.Ofday.t_of_sexp
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__ofday__t
   ;;
 
   let sexp_of_t () = (* t -> Sexplib0.Sexp.t *)
@@ -1366,7 +1366,7 @@ module Ofday = struct
     in
     Core__Core_time_float.Ofday.sexp_of_t
       positional_1
-    |> python_of_sexplib0_sexp_t
+    |> python_of_sexplib0__sexp__t
   ;;
 
   let greatereq () = (* t -> t -> bool *)
@@ -1465,7 +1465,7 @@ module Ofday = struct
     Core__Core_time_float.Ofday.min
       positional_1
       positional_2
-    |> python_of_t
+    |> python_of_core__core_time_float__ofday__t
   ;;
 
   let max () = (* t -> t -> t *)
@@ -1476,7 +1476,7 @@ module Ofday = struct
     Core__Core_time_float.Ofday.max
       positional_1
       positional_2
-    |> python_of_t
+    |> python_of_core__core_time_float__ofday__t
   ;;
 
   let ascending () = (* t -> t -> int *)
@@ -1524,7 +1524,7 @@ module Ofday = struct
       positional_1
       ~min
       ~max
-    |> python_of_t
+    |> python_of_core__core_time_float__ofday__t
   ;;
 
   let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Hash.state *)
@@ -1535,7 +1535,7 @@ module Ofday = struct
     Core__Core_time_float.Ofday.hash_fold_t
       positional_1
       positional_2
-    |> python_of_ppx_hash_lib_std_hash_state
+    |> python_of_ppx_hash_lib__std__hash__state
   ;;
 
   let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
@@ -1544,7 +1544,7 @@ module Ofday = struct
     in
     Core__Core_time_float.Ofday.hash
       positional_1
-    |> python_of_ppx_hash_lib_std_hash_hash_value
+    |> python_of_ppx_hash_lib__std__hash__hash_value
   ;;
 
   let pp () = (* Base__.Formatter.t -> t -> unit *)
@@ -1641,7 +1641,7 @@ module Ofday = struct
     in
     Core__Core_time_float.Ofday.of_string
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__ofday__t
   ;;
 
   let to_string () = (* t -> string *)
@@ -1659,19 +1659,19 @@ module Ofday = struct
     in
     Core__Core_time_float.Ofday.to_parts
       positional_1
-    |> python_of_core___import_time_span_parts_t
+    |> python_of_core____import__time__span__parts__t
   ;;
 
   let start_of_day () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.start_of_day |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.start_of_day |> python_of_core__core_time_float__ofday__t)
   ;;
 
   let start_of_next_day () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.start_of_next_day |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.start_of_next_day |> python_of_core__core_time_float__ofday__t)
   ;;
 
   let approximate_end_of_day () = (* t *)
-    Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.approximate_end_of_day |> python_of_t)
+    Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.approximate_end_of_day |> python_of_core__core_time_float__ofday__t)
   ;;
 
   let to_span_since_start_of_day () = (* t -> Core__.Import.Time.Span.t *)
@@ -1680,7 +1680,7 @@ module Ofday = struct
     in
     Core__Core_time_float.Ofday.to_span_since_start_of_day
       positional_1
-    |> python_of_core___import_time_span_t
+    |> python_of_core____import__time__span__t
   ;;
 
   let of_span_since_start_of_day_exn () = (* Core__.Import.Time.Span.t -> t *)
@@ -1689,7 +1689,7 @@ module Ofday = struct
     in
     Core__Core_time_float.Ofday.of_span_since_start_of_day_exn
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__ofday__t
   ;;
 
   let of_span_since_start_of_day () = (* Core__.Import.Time.Span.t -> t *)
@@ -1698,7 +1698,7 @@ module Ofday = struct
     in
     Core__Core_time_float.Ofday.of_span_since_start_of_day
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__ofday__t
   ;;
 
   let diff () = (* t -> t -> Core__.Import.Time.Span.t *)
@@ -1709,7 +1709,7 @@ module Ofday = struct
     Core__Core_time_float.Ofday.diff
       positional_1
       positional_2
-    |> python_of_core___import_time_span_t
+    |> python_of_core____import__time__span__t
   ;;
 
   let small_diff () = (* t -> t -> Core__.Import.Time.Span.t *)
@@ -1720,7 +1720,7 @@ module Ofday = struct
     Core__Core_time_float.Ofday.small_diff
       positional_1
       positional_2
-    |> python_of_core___import_time_span_t
+    |> python_of_core____import__time__span__t
   ;;
 
   let to_string_trimmed () = (* t -> string *)
@@ -1761,7 +1761,7 @@ module Ofday = struct
 
   module Zoned = struct
     let bin_shape_t () = (* Bin_prot.Shape.t *)
-      Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.Zoned.bin_shape_t |> python_of_bin_prot_shape_t)
+      Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.Zoned.bin_shape_t |> python_of_bin_prot__shape__t)
     ;;
 
     let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
@@ -1770,7 +1770,7 @@ module Ofday = struct
       in
       Core__Core_time_float.Ofday.Zoned.t_of_sexp
         positional_1
-      |> python_of_t
+      |> python_of_core__core_time_float__ofday__zoned__t
     ;;
 
     let sexp_of_t () = (* t -> Sexplib0.Sexp.t *)
@@ -1779,7 +1779,7 @@ module Ofday = struct
       in
       Core__Core_time_float.Ofday.Zoned.sexp_of_t
         positional_1
-      |> python_of_sexplib0_sexp_t
+      |> python_of_sexplib0__sexp__t
     ;;
 
     let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Hash.state *)
@@ -1790,7 +1790,7 @@ module Ofday = struct
       Core__Core_time_float.Ofday.Zoned.hash_fold_t
         positional_1
         positional_2
-      |> python_of_ppx_hash_lib_std_hash_state
+      |> python_of_ppx_hash_lib__std__hash__state
     ;;
 
     let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
@@ -1799,7 +1799,7 @@ module Ofday = struct
       in
       Core__Core_time_float.Ofday.Zoned.hash
         positional_1
-      |> python_of_ppx_hash_lib_std_hash_hash_value
+      |> python_of_ppx_hash_lib__std__hash__hash_value
     ;;
 
     let pp () = (* Base__.Formatter.t -> t -> unit *)
@@ -1819,7 +1819,7 @@ module Ofday = struct
       in
       Core__Core_time_float.Ofday.Zoned.of_string
         positional_1
-      |> python_of_t
+      |> python_of_core__core_time_float__ofday__zoned__t
     ;;
 
     let to_string () = (* t -> string *)
@@ -1839,7 +1839,7 @@ module Ofday = struct
       Core__Core_time_float.Ofday.Zoned.create
         positional_1
         positional_2
-      |> python_of_t
+      |> python_of_core__core_time_float__ofday__zoned__t
     ;;
 
     let create_local () = (* Core__.Import.Time.Ofday.t -> t *)
@@ -1848,7 +1848,7 @@ module Ofday = struct
       in
       Core__Core_time_float.Ofday.Zoned.create_local
         positional_1
-      |> python_of_t
+      |> python_of_core__core_time_float__ofday__zoned__t
     ;;
 
     let ofday () = (* t -> Core__.Import.Time.Ofday.t *)
@@ -1857,7 +1857,7 @@ module Ofday = struct
       in
       Core__Core_time_float.Ofday.Zoned.ofday
         positional_1
-      |> python_of_core___import_time_ofday_t
+      |> python_of_core____import__time__ofday__t
     ;;
 
     let zone () = (* t -> Zone.t *)
@@ -1866,7 +1866,7 @@ module Ofday = struct
       in
       Core__Core_time_float.Ofday.Zoned.zone
         positional_1
-      |> python_of_zone_t
+      |> python_of_zone__t
     ;;
 
     let to_time () = (* t -> Core__.Import.Date.t -> Core__.Import.Time.t *)
@@ -1877,12 +1877,12 @@ module Ofday = struct
       Core__Core_time_float.Ofday.Zoned.to_time
         positional_1
         positional_2
-      |> python_of_core___import_time_t
+      |> python_of_core____import__time__t
     ;;
 
     module With_nonchronological_compare = struct
       let bin_shape_t () = (* Bin_prot.Shape.t *)
-        Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.bin_shape_t |> python_of_bin_prot_shape_t)
+        Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.bin_shape_t |> python_of_bin_prot__shape__t)
       ;;
 
       let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
@@ -1891,7 +1891,7 @@ module Ofday = struct
         in
         Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.t_of_sexp
           positional_1
-        |> python_of_t
+        |> python_of_core__core_time_float__ofday__zoned__with_nonchronological_compare__t
       ;;
 
       let sexp_of_t () = (* t -> Sexplib0.Sexp.t *)
@@ -1900,7 +1900,7 @@ module Ofday = struct
         in
         Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.sexp_of_t
           positional_1
-        |> python_of_sexplib0_sexp_t
+        |> python_of_sexplib0__sexp__t
       ;;
 
       let compare () = (* t -> t -> int *)
@@ -1922,7 +1922,7 @@ module Ofday = struct
         Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.hash_fold_t
           positional_1
           positional_2
-        |> python_of_ppx_hash_lib_std_hash_state
+        |> python_of_ppx_hash_lib__std__hash__state
       ;;
 
       let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
@@ -1931,7 +1931,7 @@ module Ofday = struct
         in
         Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.hash
           positional_1
-        |> python_of_ppx_hash_lib_std_hash_hash_value
+        |> python_of_ppx_hash_lib__std__hash__hash_value
       ;;
 
 
@@ -1971,7 +1971,7 @@ module Ofday = struct
     in
     Core__Core_time_float.Ofday.now
       ~zone
-    |> python_of_t
+    |> python_of_core__core_time_float__ofday__t
   ;;
 
 
@@ -2030,7 +2030,7 @@ let next () = (* t -> t *)
   in
   Core__Core_time_float.next
     positional_1
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let prev () = (* t -> t *)
@@ -2039,7 +2039,7 @@ let prev () = (* t -> t *)
   in
   Core__Core_time_float.prev
     positional_1
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let to_span_since_epoch () = (* t -> Core__.Import.Time.Span.t *)
@@ -2048,7 +2048,7 @@ let to_span_since_epoch () = (* t -> Core__.Import.Time.Span.t *)
   in
   Core__Core_time_float.to_span_since_epoch
     positional_1
-  |> python_of_core___import_time_span_t
+  |> python_of_core____import__time__span__t
 ;;
 
 let of_span_since_epoch () = (* Core__.Import.Time.Span.t -> t *)
@@ -2057,7 +2057,7 @@ let of_span_since_epoch () = (* Core__.Import.Time.Span.t -> t *)
   in
   Core__Core_time_float.of_span_since_epoch
     positional_1
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 module Date_and_ofday = struct
@@ -2069,7 +2069,7 @@ module Date_and_ofday = struct
     Core__Core_time_float.Date_and_ofday.of_date_ofday
       positional_1
       positional_2
-    |> python_of_t
+    |> python_of_core__core_time_float__date_and_ofday__t
   ;;
 
   let to_date_ofday () = (* t -> (Core_kernel__.Date0.t, Core__.Import.Time.Ofday.t) *)
@@ -2078,7 +2078,7 @@ module Date_and_ofday = struct
     in
     Core__Core_time_float.Date_and_ofday.to_date_ofday
       positional_1
-    |> (fun (t0, t1) -> Py.Tuple.of_list [python_of_core_kernel___date0_t t0; python_of_core___import_time_ofday_t t1])
+    |> (fun (t0, t1) -> Py.Tuple.of_list [python_of_core_kernel____date0__t t0; python_of_core____import__time__ofday__t t1])
   ;;
 
   let to_date () = (* t -> Core_kernel__.Date0.t *)
@@ -2087,7 +2087,7 @@ module Date_and_ofday = struct
     in
     Core__Core_time_float.Date_and_ofday.to_date
       positional_1
-    |> python_of_core_kernel___date0_t
+    |> python_of_core_kernel____date0__t
   ;;
 
   let to_ofday () = (* t -> Core__.Import.Time.Ofday.t *)
@@ -2096,7 +2096,7 @@ module Date_and_ofday = struct
     in
     Core__Core_time_float.Date_and_ofday.to_ofday
       positional_1
-    |> python_of_core___import_time_ofday_t
+    |> python_of_core____import__time__ofday__t
   ;;
 
   let of_absolute () = (* Core__.Import.Time.t -> Core__.Import.Time.Span.t -> t *)
@@ -2107,7 +2107,7 @@ module Date_and_ofday = struct
     Core__Core_time_float.Date_and_ofday.of_absolute
       positional_1
       ~offset_from_utc
-    |> python_of_t
+    |> python_of_core__core_time_float__date_and_ofday__t
   ;;
 
   let to_absolute () = (* t -> Core__.Import.Time.Span.t -> Core__.Import.Time.t *)
@@ -2118,7 +2118,7 @@ module Date_and_ofday = struct
     Core__Core_time_float.Date_and_ofday.to_absolute
       positional_1
       ~offset_from_utc
-    |> python_of_core___import_time_t
+    |> python_of_core____import__time__t
   ;;
 
   let of_synthetic_span_since_epoch () = (* Core__.Import.Time.Span.t -> t *)
@@ -2127,7 +2127,7 @@ module Date_and_ofday = struct
     in
     Core__Core_time_float.Date_and_ofday.of_synthetic_span_since_epoch
       positional_1
-    |> python_of_t
+    |> python_of_core__core_time_float__date_and_ofday__t
   ;;
 
   let to_synthetic_span_since_epoch () = (* t -> Core__.Import.Time.Span.t *)
@@ -2136,7 +2136,7 @@ module Date_and_ofday = struct
     in
     Core__Core_time_float.Date_and_ofday.to_synthetic_span_since_epoch
       positional_1
-    |> python_of_core___import_time_span_t
+    |> python_of_core____import__time__span__t
   ;;
 
 
@@ -2158,7 +2158,7 @@ let now () = (* unit -> t *)
   in
   Core__Core_time_float.now
     positional_1
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let add () = (* t -> Core__.Import.Time.Span.t -> t *)
@@ -2169,7 +2169,7 @@ let add () = (* t -> Core__.Import.Time.Span.t -> t *)
   Core__Core_time_float.add
     positional_1
     positional_2
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let sub () = (* t -> Core__.Import.Time.Span.t -> t *)
@@ -2180,7 +2180,7 @@ let sub () = (* t -> Core__.Import.Time.Span.t -> t *)
   Core__Core_time_float.sub
     positional_1
     positional_2
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let diff () = (* t -> t -> Core__.Import.Time.Span.t *)
@@ -2191,7 +2191,7 @@ let diff () = (* t -> t -> Core__.Import.Time.Span.t *)
   Core__Core_time_float.diff
     positional_1
     positional_2
-  |> python_of_core___import_time_span_t
+  |> python_of_core____import__time__span__t
 ;;
 
 let abs_diff () = (* t -> t -> Core__.Import.Time.Span.t *)
@@ -2202,7 +2202,7 @@ let abs_diff () = (* t -> t -> Core__.Import.Time.Span.t *)
   Core__Core_time_float.abs_diff
     positional_1
     positional_2
-  |> python_of_core___import_time_span_t
+  |> python_of_core____import__time__span__t
 ;;
 
 let is_earlier () = (* t -> t -> bool *)
@@ -2237,7 +2237,7 @@ let of_date_ofday () = (* Core_kernel__.Zone.t -> Core_kernel__.Time_intf.Date.t
     ~zone
     positional_2
     positional_3
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let to_date_ofday () = (* t -> Core_kernel__.Zone.t -> (Core_kernel__.Time_intf.Date.t, Core__.Import.Time.Ofday.t) *)
@@ -2248,7 +2248,7 @@ let to_date_ofday () = (* t -> Core_kernel__.Zone.t -> (Core_kernel__.Time_intf.
   Core__Core_time_float.to_date_ofday
     positional_1
     ~zone
-  |> (fun (t0, t1) -> Py.Tuple.of_list [python_of_core_kernel___time_intf_date_t t0; python_of_core___import_time_ofday_t t1])
+  |> (fun (t0, t1) -> Py.Tuple.of_list [python_of_core_kernel____time_intf__date__t t0; python_of_core____import__time__ofday__t t1])
 ;;
 
 let to_date () = (* t -> Core_kernel__.Zone.t -> Core_kernel__.Time_intf.Date.t *)
@@ -2259,7 +2259,7 @@ let to_date () = (* t -> Core_kernel__.Zone.t -> Core_kernel__.Time_intf.Date.t 
   Core__Core_time_float.to_date
     positional_1
     ~zone
-  |> python_of_core_kernel___time_intf_date_t
+  |> python_of_core_kernel____time_intf__date__t
 ;;
 
 let to_ofday () = (* t -> Core_kernel__.Zone.t -> Core__.Import.Time.Ofday.t *)
@@ -2270,7 +2270,7 @@ let to_ofday () = (* t -> Core_kernel__.Zone.t -> Core__.Import.Time.Ofday.t *)
   Core__Core_time_float.to_ofday
     positional_1
     ~zone
-  |> python_of_core___import_time_ofday_t
+  |> python_of_core____import__time__ofday__t
 ;;
 
 let reset_date_cache () = (* unit -> unit *)
@@ -2283,7 +2283,7 @@ let reset_date_cache () = (* unit -> unit *)
 ;;
 
 let epoch () = (* t *)
-  Defunc.no_arg (fun () -> Core__Core_time_float.epoch |> python_of_t)
+  Defunc.no_arg (fun () -> Core__Core_time_float.epoch |> python_of_core__core_time_float__t)
 ;;
 
 let convert () = (* Core_kernel__.Zone.t -> Core_kernel__.Zone.t -> Core_kernel__.Time_intf.Date.t -> Core__.Import.Time.Ofday.t -> (Core_kernel__.Time_intf.Date.t, Core__.Import.Time.Ofday.t) *)
@@ -2298,7 +2298,7 @@ let convert () = (* Core_kernel__.Zone.t -> Core_kernel__.Zone.t -> Core_kernel_
     ~to_tz
     positional_3
     positional_4
-  |> (fun (t0, t1) -> Py.Tuple.of_list [python_of_core_kernel___time_intf_date_t t0; python_of_core___import_time_ofday_t t1])
+  |> (fun (t0, t1) -> Py.Tuple.of_list [python_of_core_kernel____time_intf__date__t t0; python_of_core____import__time__ofday__t t1])
 ;;
 
 let utc_offset () = (* t -> Core_kernel__.Zone.t -> Core__.Import.Time.Span.t *)
@@ -2309,7 +2309,7 @@ let utc_offset () = (* t -> Core_kernel__.Zone.t -> Core__.Import.Time.Span.t *)
   Core__Core_time_float.utc_offset
     positional_1
     ~zone
-  |> python_of_core___import_time_span_t
+  |> python_of_core____import__time__span__t
 ;;
 
 let to_filename_string () = (* t -> Core_kernel__.Zone.t -> string *)
@@ -2331,7 +2331,7 @@ let of_filename_string () = (* string -> Core_kernel__.Zone.t -> t *)
   Core__Core_time_float.of_filename_string
     positional_1
     ~zone
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let to_string_abs () = (* t -> Core_kernel__.Zone.t -> string *)
@@ -2397,7 +2397,7 @@ let of_localized_string () = (* Core_kernel__.Zone.t -> string -> t *)
   Core__Core_time_float.of_localized_string
     ~zone
     positional_2
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let to_string_iso8601_basic () = (* t -> Core_kernel__.Zone.t -> string *)
@@ -2412,7 +2412,7 @@ let to_string_iso8601_basic () = (* t -> Core_kernel__.Zone.t -> string *)
 ;;
 
 let bin_shape_t () = (* Bin_prot.Shape.t *)
-  Defunc.no_arg (fun () -> Core__Core_time_float.bin_shape_t |> python_of_bin_prot_shape_t)
+  Defunc.no_arg (fun () -> Core__Core_time_float.bin_shape_t |> python_of_bin_prot__shape__t)
 ;;
 
 let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
@@ -2421,7 +2421,7 @@ let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
   in
   Core__Core_time_float.t_of_sexp
     positional_1
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let sexp_of_t () = (* t -> Ppx_sexp_conv_lib.Sexp.t *)
@@ -2430,7 +2430,7 @@ let sexp_of_t () = (* t -> Ppx_sexp_conv_lib.Sexp.t *)
   in
   Core__Core_time_float.sexp_of_t
     positional_1
-  |> python_of_ppx_sexp_conv_lib_sexp_t
+  |> python_of_ppx_sexp_conv_lib__sexp__t
 ;;
 
 let of_string () = (* string -> t *)
@@ -2439,7 +2439,7 @@ let of_string () = (* string -> t *)
   in
   Core__Core_time_float.of_string
     positional_1
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let to_string () = (* t -> string *)
@@ -2558,7 +2558,7 @@ let min () = (* t -> t -> t *)
   Core__Core_time_float.min
     positional_1
     positional_2
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let max () = (* t -> t -> t *)
@@ -2569,7 +2569,7 @@ let max () = (* t -> t -> t *)
   Core__Core_time_float.max
     positional_1
     positional_2
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let ascending () = (* t -> t -> int *)
@@ -2617,7 +2617,7 @@ let clamp_exn () = (* t -> t -> t -> t *)
     positional_1
     ~min
     ~max
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Hash.state *)
@@ -2628,7 +2628,7 @@ let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Has
   Core__Core_time_float.hash_fold_t
     positional_1
     positional_2
-  |> python_of_ppx_hash_lib_std_hash_state
+  |> python_of_ppx_hash_lib__std__hash__state
 ;;
 
 let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
@@ -2637,7 +2637,7 @@ let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
   in
   Core__Core_time_float.hash
     positional_1
-  |> python_of_ppx_hash_lib_std_hash_hash_value
+  |> python_of_ppx_hash_lib__std__hash__hash_value
 ;;
 
 let get_sexp_zone () = (* unit -> Zone.t *)
@@ -2646,7 +2646,7 @@ let get_sexp_zone () = (* unit -> Zone.t *)
   in
   Core__Core_time_float.get_sexp_zone
     positional_1
-  |> python_of_zone_t
+  |> python_of_zone__t
 ;;
 
 let set_sexp_zone () = (* Zone.t -> unit *)
@@ -2743,7 +2743,7 @@ let of_tm () = (* Core__.Core_unix.tm -> Zone.t -> t *)
   Core__Core_time_float.of_tm
     positional_1
     ~zone
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let of_string_abs () = (* string -> t *)
@@ -2752,7 +2752,7 @@ let of_string_abs () = (* string -> t *)
   in
   Core__Core_time_float.of_string_abs
     positional_1
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let t_of_sexp_abs () = (* Core__.Import.Sexp.t -> t *)
@@ -2761,7 +2761,7 @@ let t_of_sexp_abs () = (* Core__.Import.Sexp.t -> t *)
   in
   Core__Core_time_float.t_of_sexp_abs
     positional_1
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 let sexp_of_t_abs () = (* t -> Zone.t -> Core__.Import.Sexp.t *)
@@ -2772,7 +2772,7 @@ let sexp_of_t_abs () = (* t -> Zone.t -> Core__.Import.Sexp.t *)
   Core__Core_time_float.sexp_of_t_abs
     positional_1
     ~zone
-  |> python_of_core___import_sexp_t
+  |> python_of_core____import__sexp__t
 ;;
 
 let pause () = (* Span.t -> unit *)
@@ -2790,7 +2790,7 @@ let pause_forever () = (* unit -> Core__.Import.never_returns *)
   in
   Core__Core_time_float.pause_forever
     positional_1
-  |> python_of_core___import_never_returns
+  |> python_of_core____import__never_returns
 ;;
 
 let format () = (* t -> string -> Zone.t -> string *)
@@ -2816,7 +2816,7 @@ let parse () = (* string -> string -> Zone.t -> t *)
     positional_1
     ~fmt
     ~zone
-  |> python_of_t
+  |> python_of_core__core_time_float__t
 ;;
 
 module Exposed_for_tests = struct

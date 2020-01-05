@@ -22,25 +22,6 @@ let basic_constr0 =
 
 let supported_constr1 = Set.of_list (module String) [ "list"; "array" ]
 
-let python_of_ml t =
-  let escape str = String.tr str ~target:'.' ~replacement:'_' |> String.lowercase in
-  let rec walk = function
-    | Arrow _ -> failwith "TODO"
-    | Tuple2 (t1, t2) -> tuple [ t1; t2 ]
-    | Tuple3 (t1, t2, t3) -> tuple [ t1; t2; t3 ]
-    | Tuple4 (t1, t2, t3, t4) -> tuple [ t1; t2; t3; t4 ]
-    | Tuple5 (t1, t2, t3, t4, t5) -> tuple [ t1; t2; t3; t4; t5 ]
-    | Atom constr -> "python_of_" ^ escape constr
-    | Apply (t, constr) -> Printf.sprintf "(python_of_%s %s)" (escape constr) (walk t)
-  and tuple ts =
-    let names = List.mapi ts ~f:(fun i t -> Printf.sprintf "t%d" i, t) in
-    Printf.sprintf
-      "(fun (%s) -> Py.Tuple.of_list [%s])"
-      (List.map names ~f:fst |> String.concat ~sep:", ")
-      (List.map names ~f:(fun (name, t) -> walk t ^ " " ^ name) |> String.concat ~sep:"; ")
-  in
-  walk t
-
 let of_type_desc type_desc =
   let open Or_error.Let_syntax in
   let rec walk (type_desc : Types.type_desc) =

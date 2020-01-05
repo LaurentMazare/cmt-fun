@@ -68,6 +68,25 @@ let escape str ~env =
 let python_name s = Map.find ops s |> Option.value ~default:s
 let ocaml_name s = if Map.mem ops s then "(" ^ s ^ ")" else s
 
+let python_of_simple_type st ~env =
+  let rec walk : Simple_type.t -> string = function
+    | Arrow _ -> failwith "TODO"
+    | Tuple2 (t1, t2) -> tuple [ t1; t2 ]
+    | Tuple3 (t1, t2, t3) -> tuple [ t1; t2; t3 ]
+    | Tuple4 (t1, t2, t3, t4) -> tuple [ t1; t2; t3; t4 ]
+    | Tuple5 (t1, t2, t3, t4, t5) -> tuple [ t1; t2; t3; t4; t5 ]
+    | Atom constr -> "python_of_" ^ escape constr ~env
+    | Apply (t, constr) ->
+      Printf.sprintf "(python_of_%s %s)" (escape constr ~env) (walk t)
+  and tuple ts =
+    let names = List.mapi ts ~f:(fun i t -> Printf.sprintf "t%d" i, t) in
+    Printf.sprintf
+      "(fun (%s) -> Py.Tuple.of_list [%s])"
+      (List.map names ~f:fst |> String.concat ~sep:", ")
+      (List.map names ~f:(fun (name, t) -> walk t ^ " " ^ name) |> String.concat ~sep:"; ")
+  in
+  walk st
+
 let pr outc ~indent =
   Printf.ksprintf (fun line ->
       if not (String.is_empty line)
@@ -144,13 +163,13 @@ let write_value ident value_description outc ~indent ~env =
             | Optional _ -> "?"
           in
           pr "    %s%s" prefix name);
-      pr "  |> %s" (Simple_type.python_of_ml result)
+      pr "  |> %s" (python_of_simple_type result ~env)
     | [], _ ->
       pr
         "  Defunc.no_arg (fun () -> %s.%s |> %s)"
         path_str
         ocaml_name
-        (Simple_type.python_of_ml simple_type));
+        (python_of_simple_type simple_type ~env));
     pr ";;";
     pr "";
     Function python_name
