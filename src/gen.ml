@@ -107,6 +107,12 @@ let write_value ident value_description outc ~indent ~env =
     let ocaml_name = Ident.name ident |> ocaml_name in
     pr "let %s () = (* %s *)" python_name (Simple_type.to_string simple_type);
     (match Simple_type.uncurrify simple_type with
+    | [ (Nolabel, Atom "unit") ], result ->
+      pr
+        "  Defunc.no_arg (fun () -> %s.%s () |> %s)"
+        path_str
+        ocaml_name
+        (python_of_simple_type result ~env)
     | (_ :: _ as args), result ->
       pr "  let%%map_open";
       let args =
@@ -120,49 +126,63 @@ let write_value ident value_description outc ~indent ~env =
             if Hash_set.mem already_used_names name then loop 1 else name
         in
         List.mapi args ~f:(fun i (arg, t) ->
-            let name =
+            let name, special_kind =
               match arg with
-              | Nolabel -> "positional_" ^ Int.to_string (i + 1)
-              | Labelled l -> unique_name l
-              | Optional l -> unique_name l
+              | Nolabel ->
+                let special_kind =
+                  match t with
+                  | Atom "unit" -> `skip_unit
+                  | _ -> `none
+                in
+                "positional_" ^ Int.to_string (i + 1), special_kind
+              | Labelled l -> unique_name l, `none
+              | Optional l -> unique_name l, `none
             in
-            name, arg, t)
+            name, arg, t, special_kind)
       in
       let nargs = List.length args in
-      List.iteri args ~f:(fun index (name, arg, t) ->
-          let kind =
-            match arg with
-            | Nolabel -> "positional"
-            | Labelled _ -> "keyword"
-            | Optional _ -> "keyword_opt"
-          in
-          let rec walk t =
-            match (t : Simple_type.t) with
-            | Atom a -> if Set.mem direct_params a then a else "param_" ^ escape a ~env
-            | Tuple2 (t1, t2) -> Printf.sprintf "pair (%s) (%s)" (walk t1) (walk t2)
-            | Tuple3 (t1, t2, t3) ->
-              Printf.sprintf "triple (%s) (%s) (%s)" (walk t1) (walk t2) (walk t3)
-            | _ -> "pyobject"
-          in
-          let suffix = if index < nargs - 1 then " and" else "" in
-          pr
-            "    %s = %s \"%s\" %s ~docstring:\"%s\"%s"
-            name
-            kind
-            name
-            (walk t)
-            (Simple_type.to_string t)
-            suffix);
+      List.iteri args ~f:(fun index (name, arg, t, special_kind) ->
+          match special_kind with
+          | `skip_unit -> ()
+          | `none ->
+            let kind =
+              match arg with
+              | Nolabel -> "positional"
+              | Labelled _ -> "keyword"
+              | Optional _ -> "keyword_opt"
+            in
+            let rec walk t =
+              match (t : Simple_type.t) with
+              | Atom a -> if Set.mem direct_params a then a else "param_" ^ escape a ~env
+              | Tuple2 (t1, t2) -> Printf.sprintf "pair (%s) (%s)" (walk t1) (walk t2)
+              | Tuple3 (t1, t2, t3) ->
+                Printf.sprintf "triple (%s) (%s) (%s)" (walk t1) (walk t2) (walk t3)
+              | _ -> "pyobject"
+            in
+            let suffix = if index < nargs - 1 then " and" else "" in
+            pr
+              "    %s = %s \"%s\" %s ~docstring:\"%s\"%s"
+              name
+              kind
+              name
+              (walk t)
+              (Simple_type.to_string t)
+              suffix);
       pr "  in";
       pr "  %s.%s" path_str ocaml_name;
-      List.iter args ~f:(fun (name, arg, _t) ->
+      List.iter args ~f:(fun (name, arg, _t, special_kind) ->
           let prefix =
             match arg with
             | Nolabel -> ""
             | Labelled _ -> "~"
             | Optional _ -> "?"
           in
-          pr "    %s%s" prefix name);
+          let name =
+            match special_kind with
+            | `none -> prefix ^ name
+            | `skip_unit -> "()"
+          in
+          pr "    %s" name);
       pr "  |> %s" (python_of_simple_type result ~env)
     | [], _ ->
       pr

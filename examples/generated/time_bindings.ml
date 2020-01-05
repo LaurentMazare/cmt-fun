@@ -1279,21 +1279,11 @@ module Zone = struct
   ;;
 
   let initialized_zones () = (* unit -> ((string, t)) list *)
-    let%map_open
-      positional_1 = positional "positional_1" param_unit ~docstring:"unit"
-    in
-    Core__Core_time_float.Zone.initialized_zones
-      positional_1
-    |> (python_of_list (fun (t0, t1) -> Py.Tuple.of_list [python_of_string t0; python_of_core__core_time_float__zone__t t1]))
+    Defunc.no_arg (fun () -> Core__Core_time_float.Zone.initialized_zones () |> (python_of_list (fun (t0, t1) -> Py.Tuple.of_list [python_of_string t0; python_of_core__core_time_float__zone__t t1])))
   ;;
 
   let init () = (* unit -> unit *)
-    let%map_open
-      positional_1 = positional "positional_1" param_unit ~docstring:"unit"
-    in
-    Core__Core_time_float.Zone.init
-      positional_1
-    |> python_of_unit
+    Defunc.no_arg (fun () -> Core__Core_time_float.Zone.init () |> python_of_unit)
   ;;
 
 
@@ -2153,12 +2143,7 @@ module Date_and_ofday = struct
     modl
 end;;
 let now () = (* unit -> t *)
-  let%map_open
-    positional_1 = positional "positional_1" param_unit ~docstring:"unit"
-  in
-  Core__Core_time_float.now
-    positional_1
-  |> python_of_core__core_time_float__t
+  Defunc.no_arg (fun () -> Core__Core_time_float.now () |> python_of_core__core_time_float__t)
 ;;
 
 let add () = (* t -> Core__.Import.Time.Span.t -> t *)
@@ -2274,12 +2259,7 @@ let to_ofday () = (* t -> Core_kernel__.Zone.t -> Core__.Import.Time.Ofday.t *)
 ;;
 
 let reset_date_cache () = (* unit -> unit *)
-  let%map_open
-    positional_1 = positional "positional_1" param_unit ~docstring:"unit"
-  in
-  Core__Core_time_float.reset_date_cache
-    positional_1
-  |> python_of_unit
+  Defunc.no_arg (fun () -> Core__Core_time_float.reset_date_cache () |> python_of_unit)
 ;;
 
 let epoch () = (* t *)
@@ -2641,12 +2621,7 @@ let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
 ;;
 
 let get_sexp_zone () = (* unit -> Zone.t *)
-  let%map_open
-    positional_1 = positional "positional_1" param_unit ~docstring:"unit"
-  in
-  Core__Core_time_float.get_sexp_zone
-    positional_1
-  |> python_of_zone__t
+  Defunc.no_arg (fun () -> Core__Core_time_float.get_sexp_zone () |> python_of_zone__t)
 ;;
 
 let set_sexp_zone () = (* Zone.t -> unit *)
@@ -2785,12 +2760,7 @@ let pause () = (* Span.t -> unit *)
 ;;
 
 let pause_forever () = (* unit -> Core__.Import.never_returns *)
-  let%map_open
-    positional_1 = positional "positional_1" param_unit ~docstring:"unit"
-  in
-  Core__Core_time_float.pause_forever
-    positional_1
-  |> python_of_core____import__never_returns
+  Defunc.no_arg (fun () -> Core__Core_time_float.pause_forever () |> python_of_core____import__never_returns)
 ;;
 
 let format () = (* t -> string -> Zone.t -> string *)
