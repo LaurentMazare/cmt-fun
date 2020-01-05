@@ -53,7 +53,9 @@ let ops =
     ; "//", "divide_"
     ]
 
-let escape str = String.tr str ~target:'.' ~replacement:'_' |> String.lowercase
+let escape str ~path =
+  List.rev (str :: path) |> String.concat ~sep:"_" |> String.lowercase
+
 let python_name s = Map.find ops s |> Option.value ~default:s
 let ocaml_name s = if Map.mem ops s then "(" ^ s ^ ")" else s
 
@@ -98,7 +100,8 @@ let write_value ident value_description outc ~indent ~path =
             in
             name, arg, t)
       in
-      List.map args ~f:(fun (name, arg, t) ->
+      let nargs = List.length args in
+      List.iteri args ~f:(fun index (name, arg, t) ->
           let kind =
             match arg with
             | Nolabel -> "positional"
@@ -107,21 +110,21 @@ let write_value ident value_description outc ~indent ~path =
           in
           let rec walk t =
             match (t : Simple_type.t) with
-            | Atom a -> if Set.mem direct_params a then a else "param_" ^ escape a
+            | Atom a -> if Set.mem direct_params a then a else "param_" ^ escape a ~path
             | Tuple2 (t1, t2) -> Printf.sprintf "pair (%s) (%s)" (walk t1) (walk t2)
             | Tuple3 (t1, t2, t3) ->
               Printf.sprintf "triple (%s) (%s) (%s)" (walk t1) (walk t2) (walk t3)
             | _ -> "pyobject"
           in
-          Printf.sprintf
-            "    %s = %s \"%s\" %s ~docstring:\"%s\""
+          let suffix = if index < nargs - 1 then " and" else "" in
+          pr
+            "    %s = %s \"%s\" %s ~docstring:\"%s\"%s"
             name
             kind
             name
             (walk t)
-            (Simple_type.to_string t))
-      |> String.concat ~sep:" and\n"
-      |> pr "%s";
+            (Simple_type.to_string t)
+            suffix);
       pr "  in";
       pr "  %s.%s" path_str ocaml_name;
       List.iter args ~f:(fun (name, arg, _t) ->
