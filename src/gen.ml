@@ -187,7 +187,9 @@ let register_module ts outc ~indent =
           "  let subm = %s.register_module ~module_name:\"%s\" in"
           ml_module_name
           python_module_name;
-        pr "  Py_module.set_value modl \"%s\" subm;" (String.lowercase ml_module_name));
+        pr
+          "  Py_module.set_value modl \"%s\" (Py_module.to_pyobject subm);"
+          (String.lowercase ml_module_name));
   pr "  modl"
 
 let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
