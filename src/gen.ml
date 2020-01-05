@@ -287,4 +287,20 @@ let write_types outc all_types =
   pr "open! Python_lib.Let_syntax";
   pr "open! Gen_import";
   pr "";
-  Hash_set.iter all_types ~f:(fun (_path, _typename) -> ())
+  Hash_set.iter all_types ~f:(fun (path, typename) ->
+      let ml_name =
+        Module_env.P.append path typename |> Module_env.P.names |> String.concat ~sep:"."
+      in
+      let full_name = escape typename ~path in
+      pr "let python_of_%s, %s_of_python =" full_name full_name;
+      pr "  let capsule = lazy (Py.Capsule.make \"%s\") in" ml_name;
+      pr "  (fun (x : %s) -> (Lazy.force capsule |> fst) x)," ml_name;
+      pr "  (fun x -> (Lazy.force capsule |> snd) x)";
+      pr ";;";
+      pr "let param_%s =" full_name;
+      pr
+        "  Defunc.Of_python.create ~type_name:\"%s\" ~conv:%s_of_python"
+        ml_name
+        full_name;
+      pr ";;";
+      pr "")
