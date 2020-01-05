@@ -2,6 +2,7 @@
 open! Base
 open! Python_lib
 open! Python_lib.Let_syntax
+open! Gen_types
 open! Gen_import
 
 let protect ~f x =

@@ -40,7 +40,12 @@ let () =
     let cmi_infos, cmt_infos = Cmt_format.read cmt_name in
     Stdio.printf "cmt loaded\n%!";
     Option.iter cmi_infos ~f:(fun cmi_infos ->
-        Stdio.Out_channel.with_file out_ml ~f:(fun outc -> Gen.write_ml outc cmi_infos);
+        let all_types =
+          Stdio.Out_channel.with_file out_ml ~f:(fun outc -> Gen.write_ml outc cmi_infos)
+        in
+        Stdio.Out_channel.with_file
+          (Caml.Filename.dirname out_ml ^ "/gen_types.ml")
+          ~f:(fun outc -> Gen.write_types outc all_types);
         Stdio.printf "cmi_name %s\n%!" cmi_infos.cmi_name;
         Stdio.printf "cmi_sign %d\n%!" (List.length cmi_infos.cmi_sign);
         let env =

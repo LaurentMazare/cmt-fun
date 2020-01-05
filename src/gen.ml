@@ -56,9 +56,6 @@ let ops =
     ; "//", "divide_"
     ]
 
-(* TODO: store all calls to this function to generate the python_of_ and param_
-   part of the bindings.
-*)
 let escape str ~path =
   Module_env.P.append path str
   |> Module_env.P.names
@@ -69,14 +66,16 @@ let escape str ~path =
 let python_name s = Map.find ops s |> Option.value ~default:s
 let ocaml_name s = if Map.mem ops s then "(" ^ s ^ ")" else s
 
-let python_of_simple_type st =
+let python_of_simple_type st ~all_types =
   let rec walk : Simple_type.t -> string = function
     | Arrow _ -> failwith "TODO"
     | Tuple2 (t1, t2) -> tuple [ t1; t2 ]
     | Tuple3 (t1, t2, t3) -> tuple [ t1; t2; t3 ]
     | Tuple4 (t1, t2, t3, t4) -> tuple [ t1; t2; t3; t4 ]
     | Tuple5 (t1, t2, t3, t4, t5) -> tuple [ t1; t2; t3; t4; t5 ]
-    | Atom (path, constr) -> "python_of_" ^ escape constr ~path
+    | Atom (path, constr) ->
+      Hash_set.add all_types (path, constr);
+      "python_of_" ^ escape constr ~path
     | Apply (t, constr) -> Printf.sprintf "(python_of_%s %s)" constr (walk t)
   and tuple ts =
     let names = List.mapi ts ~f:(fun i t -> Printf.sprintf "t%d" i, t) in
@@ -97,7 +96,7 @@ let pr outc ~indent =
         Out_channel.output_string outc line);
       Out_channel.output_char outc '\n')
 
-let write_value ident value_description outc ~indent ~env =
+let write_value ident value_description outc ~indent ~env ~all_types =
   let pr s = pr outc ~indent s in
   let path_str = Module_env.path env |> Module_env.P.names |> String.concat ~sep:"." in
   let simple_type = Simple_type.of_type_desc value_description.Types.val_type.desc ~env in
@@ -112,7 +111,7 @@ let write_value ident value_description outc ~indent ~env =
         "  Defunc.no_arg (fun () -> %s.%s () |> %s)"
         path_str
         ocaml_name
-        (python_of_simple_type result)
+        (python_of_simple_type result ~all_types)
     | (_ :: _ as args), result ->
       pr "  let%%map_open";
       let args =
@@ -154,7 +153,11 @@ let write_value ident value_description outc ~indent ~env =
             let rec walk t =
               match (t : Simple_type.t) with
               | Atom (path, a) ->
-                if Set.mem direct_params a then a else "param_" ^ escape a ~path
+                if Set.mem direct_params a
+                then a
+                else (
+                  Hash_set.add all_types (path, a);
+                  "param_" ^ escape a ~path)
               | Tuple2 (t1, t2) -> Printf.sprintf "pair (%s) (%s)" (walk t1) (walk t2)
               | Tuple3 (t1, t2, t3) ->
                 Printf.sprintf "triple (%s) (%s) (%s)" (walk t1) (walk t2) (walk t3)
@@ -184,13 +187,13 @@ let write_value ident value_description outc ~indent ~env =
             | `skip_unit -> "()"
           in
           pr "    %s" name);
-      pr "  |> %s" (python_of_simple_type result)
+      pr "  |> %s" (python_of_simple_type result ~all_types)
     | [], _ ->
       pr
         "  Defunc.no_arg (fun () -> %s.%s |> %s)"
         path_str
         ocaml_name
-        (python_of_simple_type simple_type));
+        (python_of_simple_type simple_type ~all_types));
     pr ";;";
     pr "";
     Function python_name
@@ -221,11 +224,12 @@ let register_module ts outc ~indent =
   pr "  modl"
 
 let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
+  let all_types = Hash_set.Poly.create () in
   let rec walk ~indent ~env (s : Types.signature_item) =
     let pr s = pr outc ~indent s in
     match s with
     | Sig_value (ident, value_description, Exported) ->
-      write_value ident value_description outc ~indent ~env
+      write_value ident value_description outc ~indent ~env ~all_types
     | Sig_value (_ident, _value_description, Hidden) -> Nothing
     | Sig_type (ident, _, _, _) ->
       let ident = Ident.name ident in
@@ -258,6 +262,7 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
   pr "open! Base";
   pr "open! Python_lib";
   pr "open! Python_lib.Let_syntax";
+  pr "open! Gen_types";
   pr "open! Gen_import";
   pr "";
   pr "let protect ~f x =";
@@ -271,4 +276,15 @@ let write_ml outc (cmi_infos : Cmi_format.cmi_infos) =
   in
   let ts = List.map cmi_infos.cmi_sign ~f:(walk ~indent:0 ~env) in
   pr "";
-  register_module ts outc ~indent:0
+  register_module ts outc ~indent:0;
+  all_types
+
+let write_types outc all_types =
+  let pr s = pr outc ~indent:0 s in
+  pr "(* THIS CODE IS GENERATED AUTOMATICALLY, DO NOT EDIT BY HAND *)";
+  pr "open! Base";
+  pr "open! Python_lib";
+  pr "open! Python_lib.Let_syntax";
+  pr "open! Gen_import";
+  pr "";
+  Hash_set.iter all_types ~f:(fun (_path, _typename) -> ())
