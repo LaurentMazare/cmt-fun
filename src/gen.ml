@@ -56,6 +56,9 @@ let ops =
     ; "//", "divide_"
     ]
 
+(* TODO: store all calls to this function to generate the python_of_ and param_
+   part of the bindings.
+*)
 let escape str ~env =
   let name =
     match Module_env.find_type env ~type_name:str with
@@ -75,7 +78,7 @@ let python_of_simple_type st ~env =
     | Tuple3 (t1, t2, t3) -> tuple [ t1; t2; t3 ]
     | Tuple4 (t1, t2, t3, t4) -> tuple [ t1; t2; t3; t4 ]
     | Tuple5 (t1, t2, t3, t4, t5) -> tuple [ t1; t2; t3; t4; t5 ]
-    | Atom constr -> "python_of_" ^ escape constr ~env
+    | Atom (_, constr) -> "python_of_" ^ escape constr ~env
     | Apply (t, constr) ->
       Printf.sprintf "(python_of_%s %s)" (escape constr ~env) (walk t)
   and tuple ts =
@@ -100,14 +103,14 @@ let pr outc ~indent =
 let write_value ident value_description outc ~indent ~env =
   let pr s = pr outc ~indent s in
   let path_str = Module_env.path env |> Module_env.P.names |> String.concat ~sep:"." in
-  let simple_type = Simple_type.of_type_desc value_description.Types.val_type.desc in
+  let simple_type = Simple_type.of_type_desc value_description.Types.val_type.desc ~env in
   match simple_type with
   | Ok simple_type ->
     let python_name = Ident.name ident |> python_name in
     let ocaml_name = Ident.name ident |> ocaml_name in
     pr "let %s () = (* %s *)" python_name (Simple_type.to_string simple_type);
     (match Simple_type.uncurrify simple_type with
-    | [ (Nolabel, Atom "unit") ], result ->
+    | [ (Nolabel, Atom (_, "unit")) ], result ->
       pr
         "  Defunc.no_arg (fun () -> %s.%s () |> %s)"
         path_str
@@ -131,7 +134,7 @@ let write_value ident value_description outc ~indent ~env =
               | Nolabel ->
                 let special_kind =
                   match t with
-                  | Atom "unit" -> `skip_unit
+                  | Atom (_, "unit") -> `skip_unit
                   | _ -> `none
                 in
                 "positional_" ^ Int.to_string (i + 1), special_kind
@@ -153,7 +156,8 @@ let write_value ident value_description outc ~indent ~env =
             in
             let rec walk t =
               match (t : Simple_type.t) with
-              | Atom a -> if Set.mem direct_params a then a else "param_" ^ escape a ~env
+              | Atom (_, a) ->
+                if Set.mem direct_params a then a else "param_" ^ escape a ~env
               | Tuple2 (t1, t2) -> Printf.sprintf "pair (%s) (%s)" (walk t1) (walk t2)
               | Tuple3 (t1, t2, t3) ->
                 Printf.sprintf "triple (%s) (%s) (%s)" (walk t1) (walk t2) (walk t3)

@@ -15,7 +15,7 @@ module Span = struct
     Defunc.no_arg (fun () -> Core__Core_time_float.Span.bin_shape_t |> python_of_bin_prot__shape__t)
   ;;
 
-  let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
+  let t_of_sexp () = (* Sexplib0.Sexp.t -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" param_sexplib0__sexp__t ~docstring:"Sexplib0.Sexp.t"
     in
@@ -24,9 +24,9 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let sexp_of_t () = (* t -> Sexplib0.Sexp.t *)
+  let sexp_of_t () = (* Core__Core_time_float.Span.t -> Sexplib0.Sexp.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.sexp_of_t
       positional_1
@@ -34,10 +34,10 @@ module Span = struct
   ;;
 
   module Parts = struct
-    let compare () = (* t -> t -> int *)
+    let compare () = (* Core__Core_time_float.Span.Parts.t -> Core__Core_time_float.Span.Parts.t -> int *)
       let%map_open
-        positional_1 = positional "positional_1" param_core__core_time_float__span__parts__t ~docstring:"t" and
-        positional_2 = positional "positional_2" param_core__core_time_float__span__parts__t ~docstring:"t"
+        positional_1 = positional "positional_1" param_core__core_time_float__span__parts__t ~docstring:"Core__Core_time_float.Span.Parts.t" and
+        positional_2 = positional "positional_2" param_core__core_time_float__span__parts__t ~docstring:"Core__Core_time_float.Span.Parts.t"
       in
       Core__Core_time_float.Span.Parts.compare
         positional_1
@@ -45,7 +45,7 @@ module Span = struct
       |> python_of_int
     ;;
 
-    let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
+    let t_of_sexp () = (* Sexplib0.Sexp.t -> Core__Core_time_float.Span.Parts.t *)
       let%map_open
         positional_1 = positional "positional_1" param_sexplib0__sexp__t ~docstring:"Sexplib0.Sexp.t"
       in
@@ -54,9 +54,9 @@ module Span = struct
       |> python_of_core__core_time_float__span__parts__t
     ;;
 
-    let sexp_of_t () = (* t -> Sexplib0.Sexp.t *)
+    let sexp_of_t () = (* Core__Core_time_float.Span.Parts.t -> Sexplib0.Sexp.t *)
       let%map_open
-        positional_1 = positional "positional_1" param_core__core_time_float__span__parts__t ~docstring:"t"
+        positional_1 = positional "positional_1" param_core__core_time_float__span__parts__t ~docstring:"Core__Core_time_float.Span.Parts.t"
       in
       Core__Core_time_float.Span.Parts.sexp_of_t
         positional_1
@@ -71,10 +71,10 @@ module Span = struct
       Py_module.set modl "sexp_of_t" (sexp_of_t ());
       modl
   end;;
-  let greatereq () = (* t -> t -> bool *)
+  let greatereq () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(>=)
       positional_1
@@ -82,10 +82,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let lowereq () = (* t -> t -> bool *)
+  let lowereq () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(<=)
       positional_1
@@ -93,10 +93,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let eq () = (* t -> t -> bool *)
+  let eq () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(=)
       positional_1
@@ -104,10 +104,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let greater () = (* t -> t -> bool *)
+  let greater () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(>)
       positional_1
@@ -115,10 +115,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let lower () = (* t -> t -> bool *)
+  let lower () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(<)
       positional_1
@@ -126,10 +126,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let neq () = (* t -> t -> bool *)
+  let neq () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(<>)
       positional_1
@@ -137,10 +137,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let equal () = (* t -> t -> bool *)
+  let equal () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.equal
       positional_1
@@ -148,10 +148,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let compare () = (* t -> t -> int *)
+  let compare () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> int *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.compare
       positional_1
@@ -159,10 +159,10 @@ module Span = struct
     |> python_of_int
   ;;
 
-  let min () = (* t -> t -> t *)
+  let min () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.min
       positional_1
@@ -170,10 +170,10 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let max () = (* t -> t -> t *)
+  let max () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.max
       positional_1
@@ -181,10 +181,10 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let ascending () = (* t -> t -> int *)
+  let ascending () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> int *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.ascending
       positional_1
@@ -192,10 +192,10 @@ module Span = struct
     |> python_of_int
   ;;
 
-  let descending () = (* t -> t -> int *)
+  let descending () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> int *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.descending
       positional_1
@@ -203,11 +203,11 @@ module Span = struct
     |> python_of_int
   ;;
 
-  let between () = (* t -> t -> t -> bool *)
+  let between () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      low = keyword "low" param_core__core_time_float__span__t ~docstring:"t" and
-      high = keyword "high" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      low = keyword "low" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      high = keyword "high" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.between
       positional_1
@@ -216,11 +216,11 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let clamp_exn () = (* t -> t -> t -> t *)
+  let clamp_exn () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      min = keyword "min" param_core__core_time_float__span__t ~docstring:"t" and
-      max = keyword "max" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      min = keyword "min" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      max = keyword "max" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.clamp_exn
       positional_1
@@ -229,55 +229,55 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let is_positive () = (* t -> bool *)
+  let is_positive () = (* Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.is_positive
       positional_1
     |> python_of_bool
   ;;
 
-  let is_non_negative () = (* t -> bool *)
+  let is_non_negative () = (* Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.is_non_negative
       positional_1
     |> python_of_bool
   ;;
 
-  let is_negative () = (* t -> bool *)
+  let is_negative () = (* Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.is_negative
       positional_1
     |> python_of_bool
   ;;
 
-  let is_non_positive () = (* t -> bool *)
+  let is_non_positive () = (* Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.is_non_positive
       positional_1
     |> python_of_bool
   ;;
 
-  let sign () = (* t -> Base__.Sign0.t *)
+  let sign () = (* Core__Core_time_float.Span.t -> Base__.Sign0.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.sign
       positional_1
     |> python_of_base____sign0__t
   ;;
 
-  let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Hash.state *)
+  let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> Core__Core_time_float.Span.t -> Ppx_hash_lib.Std.Hash.state *)
     let%map_open
       positional_1 = positional "positional_1" param_ppx_hash_lib__std__hash__state ~docstring:"Ppx_hash_lib.Std.Hash.state" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.hash_fold_t
       positional_1
@@ -285,19 +285,19 @@ module Span = struct
     |> python_of_ppx_hash_lib__std__hash__state
   ;;
 
-  let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
+  let hash () = (* Core__Core_time_float.Span.t -> Ppx_hash_lib.Std.Hash.hash_value *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.hash
       positional_1
     |> python_of_ppx_hash_lib__std__hash__hash_value
   ;;
 
-  let pp () = (* Base__.Formatter.t -> t -> unit *)
+  let pp () = (* Base__.Formatter.t -> Core__Core_time_float.Span.t -> unit *)
     let%map_open
       positional_1 = positional "positional_1" param_base____formatter__t ~docstring:"Base__.Formatter.t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.pp
       positional_1
@@ -305,10 +305,10 @@ module Span = struct
     |> python_of_unit
   ;;
 
-  let greatereq_approx () = (* t -> t -> bool *)
+  let greatereq_approx () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(>=.)
       positional_1
@@ -316,10 +316,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let lowereq_approx () = (* t -> t -> bool *)
+  let lowereq_approx () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(<=.)
       positional_1
@@ -327,10 +327,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let eq_approx () = (* t -> t -> bool *)
+  let eq_approx () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(=.)
       positional_1
@@ -338,10 +338,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let greater_approx () = (* t -> t -> bool *)
+  let greater_approx () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(>.)
       positional_1
@@ -349,10 +349,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let lower_approx () = (* t -> t -> bool *)
+  let lower_approx () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(<.)
       positional_1
@@ -360,10 +360,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let neq_approx () = (* t -> t -> bool *)
+  let neq_approx () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(<>.)
       positional_1
@@ -371,10 +371,10 @@ module Span = struct
     |> python_of_bool
   ;;
 
-  let robustly_compare () = (* t -> t -> int *)
+  let robustly_compare () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> int *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.robustly_compare
       positional_1
@@ -382,16 +382,16 @@ module Span = struct
     |> python_of_int
   ;;
 
-  let to_string () = (* t -> string *)
+  let to_string () = (* Core__Core_time_float.Span.t -> string *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_string
       positional_1
     |> python_of_string
   ;;
 
-  let of_string () = (* string -> t *)
+  let of_string () = (* string -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" string ~docstring:"string"
     in
@@ -400,52 +400,52 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let nanosecond () = (* t *)
+  let nanosecond () = (* Core__Core_time_float.Span.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Span.nanosecond |> python_of_core__core_time_float__span__t)
   ;;
 
-  let microsecond () = (* t *)
+  let microsecond () = (* Core__Core_time_float.Span.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Span.microsecond |> python_of_core__core_time_float__span__t)
   ;;
 
-  let millisecond () = (* t *)
+  let millisecond () = (* Core__Core_time_float.Span.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Span.millisecond |> python_of_core__core_time_float__span__t)
   ;;
 
-  let second () = (* t *)
+  let second () = (* Core__Core_time_float.Span.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Span.second |> python_of_core__core_time_float__span__t)
   ;;
 
-  let minute () = (* t *)
+  let minute () = (* Core__Core_time_float.Span.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Span.minute |> python_of_core__core_time_float__span__t)
   ;;
 
-  let hour () = (* t *)
+  let hour () = (* Core__Core_time_float.Span.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Span.hour |> python_of_core__core_time_float__span__t)
   ;;
 
-  let day () = (* t *)
+  let day () = (* Core__Core_time_float.Span.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Span.day |> python_of_core__core_time_float__span__t)
   ;;
 
-  let robust_comparison_tolerance () = (* t *)
+  let robust_comparison_tolerance () = (* Core__Core_time_float.Span.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Span.robust_comparison_tolerance |> python_of_core__core_time_float__span__t)
   ;;
 
-  let zero () = (* t *)
+  let zero () = (* Core__Core_time_float.Span.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Span.zero |> python_of_core__core_time_float__span__t)
   ;;
 
-  let to_parts () = (* t -> Parts.t *)
+  let to_parts () = (* Core__Core_time_float.Span.t -> Parts.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_parts
       positional_1
     |> python_of_parts__t
   ;;
 
-  let of_ns () = (* float -> t *)
+  let of_ns () = (* float -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" float ~docstring:"float"
     in
@@ -454,7 +454,7 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let of_us () = (* float -> t *)
+  let of_us () = (* float -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" float ~docstring:"float"
     in
@@ -463,7 +463,7 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let of_ms () = (* float -> t *)
+  let of_ms () = (* float -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" float ~docstring:"float"
     in
@@ -472,7 +472,7 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let of_sec () = (* float -> t *)
+  let of_sec () = (* float -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" float ~docstring:"float"
     in
@@ -481,7 +481,7 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let of_int_sec () = (* int -> t *)
+  let of_int_sec () = (* int -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" int ~docstring:"int"
     in
@@ -490,7 +490,7 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let of_int32_seconds () = (* Core_kernel__.Int32.t -> t *)
+  let of_int32_seconds () = (* Core_kernel__.Int32.t -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" param_core_kernel____int32__t ~docstring:"Core_kernel__.Int32.t"
     in
@@ -499,7 +499,7 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let of_int63_seconds () = (* Core_kernel__.Int63.t -> t *)
+  let of_int63_seconds () = (* Core_kernel__.Int63.t -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" param_core_kernel____int63__t ~docstring:"Core_kernel__.Int63.t"
     in
@@ -508,7 +508,7 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let of_min () = (* float -> t *)
+  let of_min () = (* float -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" float ~docstring:"float"
     in
@@ -517,7 +517,7 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let of_hr () = (* float -> t *)
+  let of_hr () = (* float -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" float ~docstring:"float"
     in
@@ -526,7 +526,7 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let of_day () = (* float -> t *)
+  let of_day () = (* float -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" float ~docstring:"float"
     in
@@ -535,91 +535,91 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let to_ns () = (* t -> float *)
+  let to_ns () = (* Core__Core_time_float.Span.t -> float *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_ns
       positional_1
     |> python_of_float
   ;;
 
-  let to_us () = (* t -> float *)
+  let to_us () = (* Core__Core_time_float.Span.t -> float *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_us
       positional_1
     |> python_of_float
   ;;
 
-  let to_ms () = (* t -> float *)
+  let to_ms () = (* Core__Core_time_float.Span.t -> float *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_ms
       positional_1
     |> python_of_float
   ;;
 
-  let to_sec () = (* t -> float *)
+  let to_sec () = (* Core__Core_time_float.Span.t -> float *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_sec
       positional_1
     |> python_of_float
   ;;
 
-  let to_min () = (* t -> float *)
+  let to_min () = (* Core__Core_time_float.Span.t -> float *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_min
       positional_1
     |> python_of_float
   ;;
 
-  let to_hr () = (* t -> float *)
+  let to_hr () = (* Core__Core_time_float.Span.t -> float *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_hr
       positional_1
     |> python_of_float
   ;;
 
-  let to_day () = (* t -> float *)
+  let to_day () = (* Core__Core_time_float.Span.t -> float *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_day
       positional_1
     |> python_of_float
   ;;
 
-  let to_int63_seconds_round_down_exn () = (* t -> Core_kernel__.Int63.t *)
+  let to_int63_seconds_round_down_exn () = (* Core__Core_time_float.Span.t -> Core_kernel__.Int63.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_int63_seconds_round_down_exn
       positional_1
     |> python_of_core_kernel____int63__t
   ;;
 
-  let to_proportional_float () = (* t -> float *)
+  let to_proportional_float () = (* Core__Core_time_float.Span.t -> float *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_proportional_float
       positional_1
     |> python_of_float
   ;;
 
-  let plus () = (* t -> t -> t *)
+  let plus () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(+)
       positional_1
@@ -627,10 +627,10 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let minus () = (* t -> t -> t *)
+  let minus () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(-)
       positional_1
@@ -638,27 +638,27 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let abs () = (* t -> t *)
+  let abs () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.abs
       positional_1
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let neg () = (* t -> t *)
+  let neg () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.neg
       positional_1
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let scale () = (* t -> float -> t *)
+  let scale () = (* Core__Core_time_float.Span.t -> float -> Core__Core_time_float.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
       positional_2 = positional "positional_2" float ~docstring:"float"
     in
     Core__Core_time_float.Span.scale
@@ -667,9 +667,9 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let divide () = (* t -> float -> t *)
+  let divide () = (* Core__Core_time_float.Span.t -> float -> Core__Core_time_float.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
       positional_2 = positional "positional_2" float ~docstring:"float"
     in
     Core__Core_time_float.Span.(/)
@@ -678,10 +678,10 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let divide_ () = (* t -> t -> float *)
+  let divide_ () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t -> float *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.(//)
       positional_1
@@ -689,43 +689,43 @@ module Span = struct
     |> python_of_float
   ;;
 
-  let next () = (* t -> t *)
+  let next () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.next
       positional_1
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let prev () = (* t -> t *)
+  let prev () = (* Core__Core_time_float.Span.t -> Core__Core_time_float.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.prev
       positional_1
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let to_short_string () = (* t -> string *)
+  let to_short_string () = (* Core__Core_time_float.Span.t -> string *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_short_string
       positional_1
     |> python_of_string
   ;;
 
-  let to_unit_of_time () = (* t -> Core_kernel__.Unit_of_time.t *)
+  let to_unit_of_time () = (* Core__Core_time_float.Span.t -> Core_kernel__.Unit_of_time.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t"
     in
     Core__Core_time_float.Span.to_unit_of_time
       positional_1
     |> python_of_core_kernel____unit_of_time__t
   ;;
 
-  let of_unit_of_time () = (* Core_kernel__.Unit_of_time.t -> t *)
+  let of_unit_of_time () = (* Core_kernel__.Unit_of_time.t -> Core__Core_time_float.Span.t *)
     let%map_open
       positional_1 = positional "positional_1" param_core_kernel____unit_of_time__t ~docstring:"Core_kernel__.Unit_of_time.t"
     in
@@ -734,9 +734,9 @@ module Span = struct
     |> python_of_core__core_time_float__span__t
   ;;
 
-  let randomize () = (* t -> Core_kernel__.Percent.t -> t *)
+  let randomize () = (* Core__Core_time_float.Span.t -> Core_kernel__.Percent.t -> Core__Core_time_float.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__span__t ~docstring:"Core__Core_time_float.Span.t" and
       percent = keyword "percent" param_core_kernel____percent__t ~docstring:"Core_kernel__.Percent.t"
     in
     Core__Core_time_float.Span.randomize
@@ -829,7 +829,7 @@ module Span = struct
     modl
 end;;
 module Zone = struct
-  let input_tz_file () = (* string -> string -> t *)
+  let input_tz_file () = (* string -> string -> Core__Core_time_float.Zone.t *)
     let%map_open
       zonename = keyword "zonename" string ~docstring:"string" and
       filename = keyword "filename" string ~docstring:"string"
@@ -840,7 +840,7 @@ module Zone = struct
     |> python_of_core__core_time_float__zone__t
   ;;
 
-  let of_utc_offset () = (* int -> t *)
+  let of_utc_offset () = (* int -> Core__Core_time_float.Zone.t *)
     let%map_open
       hours = keyword "hours" int ~docstring:"int"
     in
@@ -849,22 +849,22 @@ module Zone = struct
     |> python_of_core__core_time_float__zone__t
   ;;
 
-  let utc () = (* t *)
+  let utc () = (* Core__Core_time_float.Zone.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Zone.utc |> python_of_core__core_time_float__zone__t)
   ;;
 
-  let name () = (* t -> string *)
+  let name () = (* Core__Core_time_float.Zone.t -> string *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.name
       positional_1
     |> python_of_string
   ;;
 
-  let reset_transition_cache () = (* t -> unit *)
+  let reset_transition_cache () = (* Core__Core_time_float.Zone.t -> unit *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.reset_transition_cache
       positional_1
@@ -872,18 +872,18 @@ module Zone = struct
   ;;
 
   module Index = struct
-    let next () = (* t -> t *)
+    let next () = (* Core__Core_time_float.Zone.Index.t -> Core__Core_time_float.Zone.Index.t *)
       let%map_open
-        positional_1 = positional "positional_1" param_core__core_time_float__zone__index__t ~docstring:"t"
+        positional_1 = positional "positional_1" param_core__core_time_float__zone__index__t ~docstring:"Core__Core_time_float.Zone.Index.t"
       in
       Core__Core_time_float.Zone.Index.next
         positional_1
       |> python_of_core__core_time_float__zone__index__t
     ;;
 
-    let prev () = (* t -> t *)
+    let prev () = (* Core__Core_time_float.Zone.Index.t -> Core__Core_time_float.Zone.Index.t *)
       let%map_open
-        positional_1 = positional "positional_1" param_core__core_time_float__zone__index__t ~docstring:"t"
+        positional_1 = positional "positional_1" param_core__core_time_float__zone__index__t ~docstring:"Core__Core_time_float.Zone.Index.t"
       in
       Core__Core_time_float.Zone.Index.prev
         positional_1
@@ -897,9 +897,9 @@ module Zone = struct
       Py_module.set modl "prev" (prev ());
       modl
   end;;
-  let index () = (* t -> Core__.Import.Time.t -> Index.t *)
+  let index () = (* Core__Core_time_float.Zone.t -> Core__.Import.Time.t -> Index.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_core____import__time__t ~docstring:"Core__.Import.Time.t"
     in
     Core__Core_time_float.Zone.index
@@ -908,9 +908,9 @@ module Zone = struct
     |> python_of_index__t
   ;;
 
-  let index_of_date_and_ofday () = (* t -> Core__.Import.Time.Date_and_ofday.t -> Index.t *)
+  let index_of_date_and_ofday () = (* Core__Core_time_float.Zone.t -> Core__.Import.Time.Date_and_ofday.t -> Index.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_core____import__time__date_and_ofday__t ~docstring:"Core__.Import.Time.Date_and_ofday.t"
     in
     Core__Core_time_float.Zone.index_of_date_and_ofday
@@ -919,9 +919,9 @@ module Zone = struct
     |> python_of_index__t
   ;;
 
-  let index_offset_from_utc_exn () = (* t -> Index.t -> Core__.Import.Time.Span.t *)
+  let index_offset_from_utc_exn () = (* Core__Core_time_float.Zone.t -> Index.t -> Core__.Import.Time.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_index__t ~docstring:"Index.t"
     in
     Core__Core_time_float.Zone.index_offset_from_utc_exn
@@ -930,9 +930,9 @@ module Zone = struct
     |> python_of_core____import__time__span__t
   ;;
 
-  let index_abbreviation_exn () = (* t -> Index.t -> string *)
+  let index_abbreviation_exn () = (* Core__Core_time_float.Zone.t -> Index.t -> string *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_index__t ~docstring:"Index.t"
     in
     Core__Core_time_float.Zone.index_abbreviation_exn
@@ -941,9 +941,9 @@ module Zone = struct
     |> python_of_string
   ;;
 
-  let index_has_prev_clock_shift () = (* t -> Index.t -> bool *)
+  let index_has_prev_clock_shift () = (* Core__Core_time_float.Zone.t -> Index.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_index__t ~docstring:"Index.t"
     in
     Core__Core_time_float.Zone.index_has_prev_clock_shift
@@ -952,9 +952,9 @@ module Zone = struct
     |> python_of_bool
   ;;
 
-  let index_prev_clock_shift_time_exn () = (* t -> Index.t -> Core__.Import.Time.t *)
+  let index_prev_clock_shift_time_exn () = (* Core__Core_time_float.Zone.t -> Index.t -> Core__.Import.Time.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_index__t ~docstring:"Index.t"
     in
     Core__Core_time_float.Zone.index_prev_clock_shift_time_exn
@@ -963,9 +963,9 @@ module Zone = struct
     |> python_of_core____import__time__t
   ;;
 
-  let index_prev_clock_shift_amount_exn () = (* t -> Index.t -> Core__.Import.Time.Span.t *)
+  let index_prev_clock_shift_amount_exn () = (* Core__Core_time_float.Zone.t -> Index.t -> Core__.Import.Time.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_index__t ~docstring:"Index.t"
     in
     Core__Core_time_float.Zone.index_prev_clock_shift_amount_exn
@@ -974,9 +974,9 @@ module Zone = struct
     |> python_of_core____import__time__span__t
   ;;
 
-  let index_has_next_clock_shift () = (* t -> Index.t -> bool *)
+  let index_has_next_clock_shift () = (* Core__Core_time_float.Zone.t -> Index.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_index__t ~docstring:"Index.t"
     in
     Core__Core_time_float.Zone.index_has_next_clock_shift
@@ -985,9 +985,9 @@ module Zone = struct
     |> python_of_bool
   ;;
 
-  let index_next_clock_shift_time_exn () = (* t -> Index.t -> Core__.Import.Time.t *)
+  let index_next_clock_shift_time_exn () = (* Core__Core_time_float.Zone.t -> Index.t -> Core__.Import.Time.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_index__t ~docstring:"Index.t"
     in
     Core__Core_time_float.Zone.index_next_clock_shift_time_exn
@@ -996,9 +996,9 @@ module Zone = struct
     |> python_of_core____import__time__t
   ;;
 
-  let index_next_clock_shift_amount_exn () = (* t -> Index.t -> Core__.Import.Time.Span.t *)
+  let index_next_clock_shift_amount_exn () = (* Core__Core_time_float.Zone.t -> Index.t -> Core__.Import.Time.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_index__t ~docstring:"Index.t"
     in
     Core__Core_time_float.Zone.index_next_clock_shift_amount_exn
@@ -1007,9 +1007,9 @@ module Zone = struct
     |> python_of_core____import__time__span__t
   ;;
 
-  let abbreviation () = (* t -> Core__.Import.Time.t -> string *)
+  let abbreviation () = (* Core__Core_time_float.Zone.t -> Core__.Import.Time.t -> string *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_core____import__time__t ~docstring:"Core__.Import.Time.t"
     in
     Core__Core_time_float.Zone.abbreviation
@@ -1018,9 +1018,9 @@ module Zone = struct
     |> python_of_string
   ;;
 
-  let absolute_time_of_date_and_ofday () = (* t -> Core__.Import.Time.Date_and_ofday.t -> Core__.Import.Time.t *)
+  let absolute_time_of_date_and_ofday () = (* Core__Core_time_float.Zone.t -> Core__.Import.Time.Date_and_ofday.t -> Core__.Import.Time.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_core____import__time__date_and_ofday__t ~docstring:"Core__.Import.Time.Date_and_ofday.t"
     in
     Core__Core_time_float.Zone.absolute_time_of_date_and_ofday
@@ -1029,9 +1029,9 @@ module Zone = struct
     |> python_of_core____import__time__t
   ;;
 
-  let date_and_ofday_of_absolute_time () = (* t -> Core__.Import.Time.t -> Core__.Import.Time.Date_and_ofday.t *)
+  let date_and_ofday_of_absolute_time () = (* Core__Core_time_float.Zone.t -> Core__.Import.Time.t -> Core__.Import.Time.Date_and_ofday.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
       positional_2 = positional "positional_2" param_core____import__time__t ~docstring:"Core__.Import.Time.t"
     in
     Core__Core_time_float.Zone.date_and_ofday_of_absolute_time
@@ -1044,7 +1044,7 @@ module Zone = struct
     Defunc.no_arg (fun () -> Core__Core_time_float.Zone.bin_shape_t |> python_of_bin_prot__shape__t)
   ;;
 
-  let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
+  let t_of_sexp () = (* Sexplib0.Sexp.t -> Core__Core_time_float.Zone.t *)
     let%map_open
       positional_1 = positional "positional_1" param_sexplib0__sexp__t ~docstring:"Sexplib0.Sexp.t"
     in
@@ -1053,16 +1053,16 @@ module Zone = struct
     |> python_of_core__core_time_float__zone__t
   ;;
 
-  let sexp_of_t () = (* t -> Ppx_sexp_conv_lib.Sexp.t *)
+  let sexp_of_t () = (* Core__Core_time_float.Zone.t -> Ppx_sexp_conv_lib.Sexp.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.sexp_of_t
       positional_1
     |> python_of_ppx_sexp_conv_lib__sexp__t
   ;;
 
-  let of_string () = (* string -> t *)
+  let of_string () = (* string -> Core__Core_time_float.Zone.t *)
     let%map_open
       positional_1 = positional "positional_1" string ~docstring:"string"
     in
@@ -1071,19 +1071,19 @@ module Zone = struct
     |> python_of_core__core_time_float__zone__t
   ;;
 
-  let to_string () = (* t -> string *)
+  let to_string () = (* Core__Core_time_float.Zone.t -> string *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.to_string
       positional_1
     |> python_of_string
   ;;
 
-  let pp () = (* Base__.Formatter.t -> t -> unit *)
+  let pp () = (* Base__.Formatter.t -> Core__Core_time_float.Zone.t -> unit *)
     let%map_open
       positional_1 = positional "positional_1" param_base____formatter__t ~docstring:"Base__.Formatter.t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.pp
       positional_1
@@ -1091,10 +1091,10 @@ module Zone = struct
     |> python_of_unit
   ;;
 
-  let greatereq () = (* t -> t -> bool *)
+  let greatereq () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.(>=)
       positional_1
@@ -1102,10 +1102,10 @@ module Zone = struct
     |> python_of_bool
   ;;
 
-  let lowereq () = (* t -> t -> bool *)
+  let lowereq () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.(<=)
       positional_1
@@ -1113,10 +1113,10 @@ module Zone = struct
     |> python_of_bool
   ;;
 
-  let eq () = (* t -> t -> bool *)
+  let eq () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.(=)
       positional_1
@@ -1124,10 +1124,10 @@ module Zone = struct
     |> python_of_bool
   ;;
 
-  let greater () = (* t -> t -> bool *)
+  let greater () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.(>)
       positional_1
@@ -1135,10 +1135,10 @@ module Zone = struct
     |> python_of_bool
   ;;
 
-  let lower () = (* t -> t -> bool *)
+  let lower () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.(<)
       positional_1
@@ -1146,10 +1146,10 @@ module Zone = struct
     |> python_of_bool
   ;;
 
-  let neq () = (* t -> t -> bool *)
+  let neq () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.(<>)
       positional_1
@@ -1157,10 +1157,10 @@ module Zone = struct
     |> python_of_bool
   ;;
 
-  let equal () = (* t -> t -> bool *)
+  let equal () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.equal
       positional_1
@@ -1168,10 +1168,10 @@ module Zone = struct
     |> python_of_bool
   ;;
 
-  let compare () = (* t -> t -> int *)
+  let compare () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> int *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.compare
       positional_1
@@ -1179,10 +1179,10 @@ module Zone = struct
     |> python_of_int
   ;;
 
-  let min () = (* t -> t -> t *)
+  let min () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.min
       positional_1
@@ -1190,10 +1190,10 @@ module Zone = struct
     |> python_of_core__core_time_float__zone__t
   ;;
 
-  let max () = (* t -> t -> t *)
+  let max () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.max
       positional_1
@@ -1201,10 +1201,10 @@ module Zone = struct
     |> python_of_core__core_time_float__zone__t
   ;;
 
-  let ascending () = (* t -> t -> int *)
+  let ascending () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> int *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.ascending
       positional_1
@@ -1212,10 +1212,10 @@ module Zone = struct
     |> python_of_int
   ;;
 
-  let descending () = (* t -> t -> int *)
+  let descending () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> int *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.descending
       positional_1
@@ -1223,11 +1223,11 @@ module Zone = struct
     |> python_of_int
   ;;
 
-  let between () = (* t -> t -> t -> bool *)
+  let between () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      low = keyword "low" param_core__core_time_float__zone__t ~docstring:"t" and
-      high = keyword "high" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      low = keyword "low" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      high = keyword "high" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.between
       positional_1
@@ -1236,11 +1236,11 @@ module Zone = struct
     |> python_of_bool
   ;;
 
-  let clamp_exn () = (* t -> t -> t -> t *)
+  let clamp_exn () = (* Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t -> Core__Core_time_float.Zone.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t" and
-      min = keyword "min" param_core__core_time_float__zone__t ~docstring:"t" and
-      max = keyword "max" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      min = keyword "min" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t" and
+      max = keyword "max" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.clamp_exn
       positional_1
@@ -1249,10 +1249,10 @@ module Zone = struct
     |> python_of_core__core_time_float__zone__t
   ;;
 
-  let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Hash.state *)
+  let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> Core__Core_time_float.Zone.t -> Ppx_hash_lib.Std.Hash.state *)
     let%map_open
       positional_1 = positional "positional_1" param_ppx_hash_lib__std__hash__state ~docstring:"Ppx_hash_lib.Std.Hash.state" and
-      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_2 = positional "positional_2" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.hash_fold_t
       positional_1
@@ -1260,16 +1260,16 @@ module Zone = struct
     |> python_of_ppx_hash_lib__std__hash__state
   ;;
 
-  let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
+  let hash () = (* Core__Core_time_float.Zone.t -> Ppx_hash_lib.Std.Hash.hash_value *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__zone__t ~docstring:"Core__Core_time_float.Zone.t"
     in
     Core__Core_time_float.Zone.hash
       positional_1
     |> python_of_ppx_hash_lib__std__hash__hash_value
   ;;
 
-  let find_exn () = (* string -> t *)
+  let find_exn () = (* string -> Core__Core_time_float.Zone.t *)
     let%map_open
       positional_1 = positional "positional_1" string ~docstring:"string"
     in
@@ -1278,7 +1278,7 @@ module Zone = struct
     |> python_of_core__core_time_float__zone__t
   ;;
 
-  let initialized_zones () = (* unit -> ((string, t)) list *)
+  let initialized_zones () = (* unit -> ((string, Core__Core_time_float.Zone.t)) list *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Zone.initialized_zones () |> (python_of_list (fun (t0, t1) -> Py.Tuple.of_list [python_of_string t0; python_of_core__core_time_float__zone__t t1])))
   ;;
 
@@ -1341,7 +1341,7 @@ module Ofday = struct
     Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.bin_shape_t |> python_of_bin_prot__shape__t)
   ;;
 
-  let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
+  let t_of_sexp () = (* Sexplib0.Sexp.t -> Core__Core_time_float.Ofday.t *)
     let%map_open
       positional_1 = positional "positional_1" param_sexplib0__sexp__t ~docstring:"Sexplib0.Sexp.t"
     in
@@ -1350,19 +1350,19 @@ module Ofday = struct
     |> python_of_core__core_time_float__ofday__t
   ;;
 
-  let sexp_of_t () = (* t -> Sexplib0.Sexp.t *)
+  let sexp_of_t () = (* Core__Core_time_float.Ofday.t -> Sexplib0.Sexp.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.sexp_of_t
       positional_1
     |> python_of_sexplib0__sexp__t
   ;;
 
-  let greatereq () = (* t -> t -> bool *)
+  let greatereq () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.(>=)
       positional_1
@@ -1370,10 +1370,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let lowereq () = (* t -> t -> bool *)
+  let lowereq () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.(<=)
       positional_1
@@ -1381,10 +1381,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let eq () = (* t -> t -> bool *)
+  let eq () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.(=)
       positional_1
@@ -1392,10 +1392,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let greater () = (* t -> t -> bool *)
+  let greater () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.(>)
       positional_1
@@ -1403,10 +1403,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let lower () = (* t -> t -> bool *)
+  let lower () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.(<)
       positional_1
@@ -1414,10 +1414,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let neq () = (* t -> t -> bool *)
+  let neq () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.(<>)
       positional_1
@@ -1425,10 +1425,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let equal () = (* t -> t -> bool *)
+  let equal () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.equal
       positional_1
@@ -1436,10 +1436,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let compare () = (* t -> t -> int *)
+  let compare () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> int *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.compare
       positional_1
@@ -1447,10 +1447,10 @@ module Ofday = struct
     |> python_of_int
   ;;
 
-  let min () = (* t -> t -> t *)
+  let min () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.min
       positional_1
@@ -1458,10 +1458,10 @@ module Ofday = struct
     |> python_of_core__core_time_float__ofday__t
   ;;
 
-  let max () = (* t -> t -> t *)
+  let max () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.max
       positional_1
@@ -1469,10 +1469,10 @@ module Ofday = struct
     |> python_of_core__core_time_float__ofday__t
   ;;
 
-  let ascending () = (* t -> t -> int *)
+  let ascending () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> int *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.ascending
       positional_1
@@ -1480,10 +1480,10 @@ module Ofday = struct
     |> python_of_int
   ;;
 
-  let descending () = (* t -> t -> int *)
+  let descending () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> int *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.descending
       positional_1
@@ -1491,11 +1491,11 @@ module Ofday = struct
     |> python_of_int
   ;;
 
-  let between () = (* t -> t -> t -> bool *)
+  let between () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      low = keyword "low" param_core__core_time_float__ofday__t ~docstring:"t" and
-      high = keyword "high" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      low = keyword "low" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      high = keyword "high" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.between
       positional_1
@@ -1504,11 +1504,11 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let clamp_exn () = (* t -> t -> t -> t *)
+  let clamp_exn () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      min = keyword "min" param_core__core_time_float__ofday__t ~docstring:"t" and
-      max = keyword "max" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      min = keyword "min" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      max = keyword "max" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.clamp_exn
       positional_1
@@ -1517,10 +1517,10 @@ module Ofday = struct
     |> python_of_core__core_time_float__ofday__t
   ;;
 
-  let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Hash.state *)
+  let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> Core__Core_time_float.Ofday.t -> Ppx_hash_lib.Std.Hash.state *)
     let%map_open
       positional_1 = positional "positional_1" param_ppx_hash_lib__std__hash__state ~docstring:"Ppx_hash_lib.Std.Hash.state" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.hash_fold_t
       positional_1
@@ -1528,19 +1528,19 @@ module Ofday = struct
     |> python_of_ppx_hash_lib__std__hash__state
   ;;
 
-  let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
+  let hash () = (* Core__Core_time_float.Ofday.t -> Ppx_hash_lib.Std.Hash.hash_value *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.hash
       positional_1
     |> python_of_ppx_hash_lib__std__hash__hash_value
   ;;
 
-  let pp () = (* Base__.Formatter.t -> t -> unit *)
+  let pp () = (* Base__.Formatter.t -> Core__Core_time_float.Ofday.t -> unit *)
     let%map_open
       positional_1 = positional "positional_1" param_base____formatter__t ~docstring:"Base__.Formatter.t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.pp
       positional_1
@@ -1548,10 +1548,10 @@ module Ofday = struct
     |> python_of_unit
   ;;
 
-  let greatereq_approx () = (* t -> t -> bool *)
+  let greatereq_approx () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.(>=.)
       positional_1
@@ -1559,10 +1559,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let lowereq_approx () = (* t -> t -> bool *)
+  let lowereq_approx () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.(<=.)
       positional_1
@@ -1570,10 +1570,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let eq_approx () = (* t -> t -> bool *)
+  let eq_approx () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.(=.)
       positional_1
@@ -1581,10 +1581,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let greater_approx () = (* t -> t -> bool *)
+  let greater_approx () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.(>.)
       positional_1
@@ -1592,10 +1592,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let lower_approx () = (* t -> t -> bool *)
+  let lower_approx () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.(<.)
       positional_1
@@ -1603,10 +1603,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let neq_approx () = (* t -> t -> bool *)
+  let neq_approx () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> bool *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.(<>.)
       positional_1
@@ -1614,10 +1614,10 @@ module Ofday = struct
     |> python_of_bool
   ;;
 
-  let robustly_compare () = (* t -> t -> int *)
+  let robustly_compare () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> int *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.robustly_compare
       positional_1
@@ -1625,7 +1625,7 @@ module Ofday = struct
     |> python_of_int
   ;;
 
-  let of_string () = (* string -> t *)
+  let of_string () = (* string -> Core__Core_time_float.Ofday.t *)
     let%map_open
       positional_1 = positional "positional_1" string ~docstring:"string"
     in
@@ -1634,46 +1634,46 @@ module Ofday = struct
     |> python_of_core__core_time_float__ofday__t
   ;;
 
-  let to_string () = (* t -> string *)
+  let to_string () = (* Core__Core_time_float.Ofday.t -> string *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.to_string
       positional_1
     |> python_of_string
   ;;
 
-  let to_parts () = (* t -> Core__.Import.Time.Span.Parts.t *)
+  let to_parts () = (* Core__Core_time_float.Ofday.t -> Core__.Import.Time.Span.Parts.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.to_parts
       positional_1
     |> python_of_core____import__time__span__parts__t
   ;;
 
-  let start_of_day () = (* t *)
+  let start_of_day () = (* Core__Core_time_float.Ofday.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.start_of_day |> python_of_core__core_time_float__ofday__t)
   ;;
 
-  let start_of_next_day () = (* t *)
+  let start_of_next_day () = (* Core__Core_time_float.Ofday.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.start_of_next_day |> python_of_core__core_time_float__ofday__t)
   ;;
 
-  let approximate_end_of_day () = (* t *)
+  let approximate_end_of_day () = (* Core__Core_time_float.Ofday.t *)
     Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.approximate_end_of_day |> python_of_core__core_time_float__ofday__t)
   ;;
 
-  let to_span_since_start_of_day () = (* t -> Core__.Import.Time.Span.t *)
+  let to_span_since_start_of_day () = (* Core__Core_time_float.Ofday.t -> Core__.Import.Time.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.to_span_since_start_of_day
       positional_1
     |> python_of_core____import__time__span__t
   ;;
 
-  let of_span_since_start_of_day_exn () = (* Core__.Import.Time.Span.t -> t *)
+  let of_span_since_start_of_day_exn () = (* Core__.Import.Time.Span.t -> Core__Core_time_float.Ofday.t *)
     let%map_open
       positional_1 = positional "positional_1" param_core____import__time__span__t ~docstring:"Core__.Import.Time.Span.t"
     in
@@ -1682,7 +1682,7 @@ module Ofday = struct
     |> python_of_core__core_time_float__ofday__t
   ;;
 
-  let of_span_since_start_of_day () = (* Core__.Import.Time.Span.t -> t *)
+  let of_span_since_start_of_day () = (* Core__.Import.Time.Span.t -> Core__Core_time_float.Ofday.t *)
     let%map_open
       positional_1 = positional "positional_1" param_core____import__time__span__t ~docstring:"Core__.Import.Time.Span.t"
     in
@@ -1691,10 +1691,10 @@ module Ofday = struct
     |> python_of_core__core_time_float__ofday__t
   ;;
 
-  let diff () = (* t -> t -> Core__.Import.Time.Span.t *)
+  let diff () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> Core__.Import.Time.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.diff
       positional_1
@@ -1702,10 +1702,10 @@ module Ofday = struct
     |> python_of_core____import__time__span__t
   ;;
 
-  let small_diff () = (* t -> t -> Core__.Import.Time.Span.t *)
+  let small_diff () = (* Core__Core_time_float.Ofday.t -> Core__Core_time_float.Ofday.t -> Core__.Import.Time.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t" and
-      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t" and
+      positional_2 = positional "positional_2" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.small_diff
       positional_1
@@ -1713,36 +1713,36 @@ module Ofday = struct
     |> python_of_core____import__time__span__t
   ;;
 
-  let to_string_trimmed () = (* t -> string *)
+  let to_string_trimmed () = (* Core__Core_time_float.Ofday.t -> string *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.to_string_trimmed
       positional_1
     |> python_of_string
   ;;
 
-  let to_sec_string () = (* t -> string *)
+  let to_sec_string () = (* Core__Core_time_float.Ofday.t -> string *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.to_sec_string
       positional_1
     |> python_of_string
   ;;
 
-  let to_millisecond_string () = (* t -> string *)
+  let to_millisecond_string () = (* Core__Core_time_float.Ofday.t -> string *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.to_millisecond_string
       positional_1
     |> python_of_string
   ;;
 
-  let to_millisec_string () = (* t -> string *)
+  let to_millisec_string () = (* Core__Core_time_float.Ofday.t -> string *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__ofday__t ~docstring:"Core__Core_time_float.Ofday.t"
     in
     Core__Core_time_float.Ofday.to_millisec_string
       positional_1
@@ -1754,7 +1754,7 @@ module Ofday = struct
       Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.Zoned.bin_shape_t |> python_of_bin_prot__shape__t)
     ;;
 
-    let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
+    let t_of_sexp () = (* Sexplib0.Sexp.t -> Core__Core_time_float.Ofday.Zoned.t *)
       let%map_open
         positional_1 = positional "positional_1" param_sexplib0__sexp__t ~docstring:"Sexplib0.Sexp.t"
       in
@@ -1763,19 +1763,19 @@ module Ofday = struct
       |> python_of_core__core_time_float__ofday__zoned__t
     ;;
 
-    let sexp_of_t () = (* t -> Sexplib0.Sexp.t *)
+    let sexp_of_t () = (* Core__Core_time_float.Ofday.Zoned.t -> Sexplib0.Sexp.t *)
       let%map_open
-        positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__t ~docstring:"t"
+        positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__t ~docstring:"Core__Core_time_float.Ofday.Zoned.t"
       in
       Core__Core_time_float.Ofday.Zoned.sexp_of_t
         positional_1
       |> python_of_sexplib0__sexp__t
     ;;
 
-    let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Hash.state *)
+    let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> Core__Core_time_float.Ofday.Zoned.t -> Ppx_hash_lib.Std.Hash.state *)
       let%map_open
         positional_1 = positional "positional_1" param_ppx_hash_lib__std__hash__state ~docstring:"Ppx_hash_lib.Std.Hash.state" and
-        positional_2 = positional "positional_2" param_core__core_time_float__ofday__zoned__t ~docstring:"t"
+        positional_2 = positional "positional_2" param_core__core_time_float__ofday__zoned__t ~docstring:"Core__Core_time_float.Ofday.Zoned.t"
       in
       Core__Core_time_float.Ofday.Zoned.hash_fold_t
         positional_1
@@ -1783,19 +1783,19 @@ module Ofday = struct
       |> python_of_ppx_hash_lib__std__hash__state
     ;;
 
-    let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
+    let hash () = (* Core__Core_time_float.Ofday.Zoned.t -> Ppx_hash_lib.Std.Hash.hash_value *)
       let%map_open
-        positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__t ~docstring:"t"
+        positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__t ~docstring:"Core__Core_time_float.Ofday.Zoned.t"
       in
       Core__Core_time_float.Ofday.Zoned.hash
         positional_1
       |> python_of_ppx_hash_lib__std__hash__hash_value
     ;;
 
-    let pp () = (* Base__.Formatter.t -> t -> unit *)
+    let pp () = (* Base__.Formatter.t -> Core__Core_time_float.Ofday.Zoned.t -> unit *)
       let%map_open
         positional_1 = positional "positional_1" param_base____formatter__t ~docstring:"Base__.Formatter.t" and
-        positional_2 = positional "positional_2" param_core__core_time_float__ofday__zoned__t ~docstring:"t"
+        positional_2 = positional "positional_2" param_core__core_time_float__ofday__zoned__t ~docstring:"Core__Core_time_float.Ofday.Zoned.t"
       in
       Core__Core_time_float.Ofday.Zoned.pp
         positional_1
@@ -1803,7 +1803,7 @@ module Ofday = struct
       |> python_of_unit
     ;;
 
-    let of_string () = (* string -> t *)
+    let of_string () = (* string -> Core__Core_time_float.Ofday.Zoned.t *)
       let%map_open
         positional_1 = positional "positional_1" string ~docstring:"string"
       in
@@ -1812,16 +1812,16 @@ module Ofday = struct
       |> python_of_core__core_time_float__ofday__zoned__t
     ;;
 
-    let to_string () = (* t -> string *)
+    let to_string () = (* Core__Core_time_float.Ofday.Zoned.t -> string *)
       let%map_open
-        positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__t ~docstring:"t"
+        positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__t ~docstring:"Core__Core_time_float.Ofday.Zoned.t"
       in
       Core__Core_time_float.Ofday.Zoned.to_string
         positional_1
       |> python_of_string
     ;;
 
-    let create () = (* Core__.Import.Time.Ofday.t -> Zone.t -> t *)
+    let create () = (* Core__.Import.Time.Ofday.t -> Zone.t -> Core__Core_time_float.Ofday.Zoned.t *)
       let%map_open
         positional_1 = positional "positional_1" param_core____import__time__ofday__t ~docstring:"Core__.Import.Time.Ofday.t" and
         positional_2 = positional "positional_2" param_zone__t ~docstring:"Zone.t"
@@ -1832,7 +1832,7 @@ module Ofday = struct
       |> python_of_core__core_time_float__ofday__zoned__t
     ;;
 
-    let create_local () = (* Core__.Import.Time.Ofday.t -> t *)
+    let create_local () = (* Core__.Import.Time.Ofday.t -> Core__Core_time_float.Ofday.Zoned.t *)
       let%map_open
         positional_1 = positional "positional_1" param_core____import__time__ofday__t ~docstring:"Core__.Import.Time.Ofday.t"
       in
@@ -1841,27 +1841,27 @@ module Ofday = struct
       |> python_of_core__core_time_float__ofday__zoned__t
     ;;
 
-    let ofday () = (* t -> Core__.Import.Time.Ofday.t *)
+    let ofday () = (* Core__Core_time_float.Ofday.Zoned.t -> Core__.Import.Time.Ofday.t *)
       let%map_open
-        positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__t ~docstring:"t"
+        positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__t ~docstring:"Core__Core_time_float.Ofday.Zoned.t"
       in
       Core__Core_time_float.Ofday.Zoned.ofday
         positional_1
       |> python_of_core____import__time__ofday__t
     ;;
 
-    let zone () = (* t -> Zone.t *)
+    let zone () = (* Core__Core_time_float.Ofday.Zoned.t -> Zone.t *)
       let%map_open
-        positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__t ~docstring:"t"
+        positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__t ~docstring:"Core__Core_time_float.Ofday.Zoned.t"
       in
       Core__Core_time_float.Ofday.Zoned.zone
         positional_1
       |> python_of_zone__t
     ;;
 
-    let to_time () = (* t -> Core__.Import.Date.t -> Core__.Import.Time.t *)
+    let to_time () = (* Core__Core_time_float.Ofday.Zoned.t -> Core__.Import.Date.t -> Core__.Import.Time.t *)
       let%map_open
-        positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__t ~docstring:"t" and
+        positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__t ~docstring:"Core__Core_time_float.Ofday.Zoned.t" and
         positional_2 = positional "positional_2" param_core____import__date__t ~docstring:"Core__.Import.Date.t"
       in
       Core__Core_time_float.Ofday.Zoned.to_time
@@ -1875,7 +1875,7 @@ module Ofday = struct
         Defunc.no_arg (fun () -> Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.bin_shape_t |> python_of_bin_prot__shape__t)
       ;;
 
-      let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
+      let t_of_sexp () = (* Sexplib0.Sexp.t -> Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.t *)
         let%map_open
           positional_1 = positional "positional_1" param_sexplib0__sexp__t ~docstring:"Sexplib0.Sexp.t"
         in
@@ -1884,19 +1884,19 @@ module Ofday = struct
         |> python_of_core__core_time_float__ofday__zoned__with_nonchronological_compare__t
       ;;
 
-      let sexp_of_t () = (* t -> Sexplib0.Sexp.t *)
+      let sexp_of_t () = (* Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.t -> Sexplib0.Sexp.t *)
         let%map_open
-          positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__with_nonchronological_compare__t ~docstring:"t"
+          positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__with_nonchronological_compare__t ~docstring:"Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.t"
         in
         Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.sexp_of_t
           positional_1
         |> python_of_sexplib0__sexp__t
       ;;
 
-      let compare () = (* t -> t -> int *)
+      let compare () = (* Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.t -> Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.t -> int *)
         let%map_open
-          positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__with_nonchronological_compare__t ~docstring:"t" and
-          positional_2 = positional "positional_2" param_core__core_time_float__ofday__zoned__with_nonchronological_compare__t ~docstring:"t"
+          positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__with_nonchronological_compare__t ~docstring:"Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.t" and
+          positional_2 = positional "positional_2" param_core__core_time_float__ofday__zoned__with_nonchronological_compare__t ~docstring:"Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.t"
         in
         Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.compare
           positional_1
@@ -1904,10 +1904,10 @@ module Ofday = struct
         |> python_of_int
       ;;
 
-      let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Hash.state *)
+      let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.t -> Ppx_hash_lib.Std.Hash.state *)
         let%map_open
           positional_1 = positional "positional_1" param_ppx_hash_lib__std__hash__state ~docstring:"Ppx_hash_lib.Std.Hash.state" and
-          positional_2 = positional "positional_2" param_core__core_time_float__ofday__zoned__with_nonchronological_compare__t ~docstring:"t"
+          positional_2 = positional "positional_2" param_core__core_time_float__ofday__zoned__with_nonchronological_compare__t ~docstring:"Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.t"
         in
         Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.hash_fold_t
           positional_1
@@ -1915,9 +1915,9 @@ module Ofday = struct
         |> python_of_ppx_hash_lib__std__hash__state
       ;;
 
-      let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
+      let hash () = (* Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.t -> Ppx_hash_lib.Std.Hash.hash_value *)
         let%map_open
-          positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__with_nonchronological_compare__t ~docstring:"t"
+          positional_1 = positional "positional_1" param_core__core_time_float__ofday__zoned__with_nonchronological_compare__t ~docstring:"Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.t"
         in
         Core__Core_time_float.Ofday.Zoned.With_nonchronological_compare.hash
           positional_1
@@ -1955,7 +1955,7 @@ module Ofday = struct
       Py_module.set_value modl "with_nonchronological_compare" (Py_module.to_pyobject subm);
       modl
   end;;
-  let now () = (* Zone.t -> t *)
+  let now () = (* Zone.t -> Core__Core_time_float.Ofday.t *)
     let%map_open
       zone = keyword "zone" param_zone__t ~docstring:"Zone.t"
     in
@@ -2014,34 +2014,34 @@ module Ofday = struct
     Py_module.set modl "now" (now ());
     modl
 end;;
-let next () = (* t -> t *)
+let next () = (* Core__Core_time_float.t -> Core__Core_time_float.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.next
     positional_1
   |> python_of_core__core_time_float__t
 ;;
 
-let prev () = (* t -> t *)
+let prev () = (* Core__Core_time_float.t -> Core__Core_time_float.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.prev
     positional_1
   |> python_of_core__core_time_float__t
 ;;
 
-let to_span_since_epoch () = (* t -> Core__.Import.Time.Span.t *)
+let to_span_since_epoch () = (* Core__Core_time_float.t -> Core__.Import.Time.Span.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.to_span_since_epoch
     positional_1
   |> python_of_core____import__time__span__t
 ;;
 
-let of_span_since_epoch () = (* Core__.Import.Time.Span.t -> t *)
+let of_span_since_epoch () = (* Core__.Import.Time.Span.t -> Core__Core_time_float.t *)
   let%map_open
     positional_1 = positional "positional_1" param_core____import__time__span__t ~docstring:"Core__.Import.Time.Span.t"
   in
@@ -2051,7 +2051,7 @@ let of_span_since_epoch () = (* Core__.Import.Time.Span.t -> t *)
 ;;
 
 module Date_and_ofday = struct
-  let of_date_ofday () = (* Core_kernel__.Date0.t -> Core__.Import.Time.Ofday.t -> t *)
+  let of_date_ofday () = (* Core_kernel__.Date0.t -> Core__.Import.Time.Ofday.t -> Core__Core_time_float.Date_and_ofday.t *)
     let%map_open
       positional_1 = positional "positional_1" param_core_kernel____date0__t ~docstring:"Core_kernel__.Date0.t" and
       positional_2 = positional "positional_2" param_core____import__time__ofday__t ~docstring:"Core__.Import.Time.Ofday.t"
@@ -2062,34 +2062,34 @@ module Date_and_ofday = struct
     |> python_of_core__core_time_float__date_and_ofday__t
   ;;
 
-  let to_date_ofday () = (* t -> (Core_kernel__.Date0.t, Core__.Import.Time.Ofday.t) *)
+  let to_date_ofday () = (* Core__Core_time_float.Date_and_ofday.t -> (Core_kernel__.Date0.t, Core__.Import.Time.Ofday.t) *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__date_and_ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__date_and_ofday__t ~docstring:"Core__Core_time_float.Date_and_ofday.t"
     in
     Core__Core_time_float.Date_and_ofday.to_date_ofday
       positional_1
     |> (fun (t0, t1) -> Py.Tuple.of_list [python_of_core_kernel____date0__t t0; python_of_core____import__time__ofday__t t1])
   ;;
 
-  let to_date () = (* t -> Core_kernel__.Date0.t *)
+  let to_date () = (* Core__Core_time_float.Date_and_ofday.t -> Core_kernel__.Date0.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__date_and_ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__date_and_ofday__t ~docstring:"Core__Core_time_float.Date_and_ofday.t"
     in
     Core__Core_time_float.Date_and_ofday.to_date
       positional_1
     |> python_of_core_kernel____date0__t
   ;;
 
-  let to_ofday () = (* t -> Core__.Import.Time.Ofday.t *)
+  let to_ofday () = (* Core__Core_time_float.Date_and_ofday.t -> Core__.Import.Time.Ofday.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__date_and_ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__date_and_ofday__t ~docstring:"Core__Core_time_float.Date_and_ofday.t"
     in
     Core__Core_time_float.Date_and_ofday.to_ofday
       positional_1
     |> python_of_core____import__time__ofday__t
   ;;
 
-  let of_absolute () = (* Core__.Import.Time.t -> Core__.Import.Time.Span.t -> t *)
+  let of_absolute () = (* Core__.Import.Time.t -> Core__.Import.Time.Span.t -> Core__Core_time_float.Date_and_ofday.t *)
     let%map_open
       positional_1 = positional "positional_1" param_core____import__time__t ~docstring:"Core__.Import.Time.t" and
       offset_from_utc = keyword "offset_from_utc" param_core____import__time__span__t ~docstring:"Core__.Import.Time.Span.t"
@@ -2100,9 +2100,9 @@ module Date_and_ofday = struct
     |> python_of_core__core_time_float__date_and_ofday__t
   ;;
 
-  let to_absolute () = (* t -> Core__.Import.Time.Span.t -> Core__.Import.Time.t *)
+  let to_absolute () = (* Core__Core_time_float.Date_and_ofday.t -> Core__.Import.Time.Span.t -> Core__.Import.Time.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__date_and_ofday__t ~docstring:"t" and
+      positional_1 = positional "positional_1" param_core__core_time_float__date_and_ofday__t ~docstring:"Core__Core_time_float.Date_and_ofday.t" and
       offset_from_utc = keyword "offset_from_utc" param_core____import__time__span__t ~docstring:"Core__.Import.Time.Span.t"
     in
     Core__Core_time_float.Date_and_ofday.to_absolute
@@ -2111,7 +2111,7 @@ module Date_and_ofday = struct
     |> python_of_core____import__time__t
   ;;
 
-  let of_synthetic_span_since_epoch () = (* Core__.Import.Time.Span.t -> t *)
+  let of_synthetic_span_since_epoch () = (* Core__.Import.Time.Span.t -> Core__Core_time_float.Date_and_ofday.t *)
     let%map_open
       positional_1 = positional "positional_1" param_core____import__time__span__t ~docstring:"Core__.Import.Time.Span.t"
     in
@@ -2120,9 +2120,9 @@ module Date_and_ofday = struct
     |> python_of_core__core_time_float__date_and_ofday__t
   ;;
 
-  let to_synthetic_span_since_epoch () = (* t -> Core__.Import.Time.Span.t *)
+  let to_synthetic_span_since_epoch () = (* Core__Core_time_float.Date_and_ofday.t -> Core__.Import.Time.Span.t *)
     let%map_open
-      positional_1 = positional "positional_1" param_core__core_time_float__date_and_ofday__t ~docstring:"t"
+      positional_1 = positional "positional_1" param_core__core_time_float__date_and_ofday__t ~docstring:"Core__Core_time_float.Date_and_ofday.t"
     in
     Core__Core_time_float.Date_and_ofday.to_synthetic_span_since_epoch
       positional_1
@@ -2142,13 +2142,13 @@ module Date_and_ofday = struct
     Py_module.set modl "to_synthetic_span_since_epoch" (to_synthetic_span_since_epoch ());
     modl
 end;;
-let now () = (* unit -> t *)
+let now () = (* unit -> Core__Core_time_float.t *)
   Defunc.no_arg (fun () -> Core__Core_time_float.now () |> python_of_core__core_time_float__t)
 ;;
 
-let add () = (* t -> Core__.Import.Time.Span.t -> t *)
+let add () = (* Core__Core_time_float.t -> Core__.Import.Time.Span.t -> Core__Core_time_float.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     positional_2 = positional "positional_2" param_core____import__time__span__t ~docstring:"Core__.Import.Time.Span.t"
   in
   Core__Core_time_float.add
@@ -2157,9 +2157,9 @@ let add () = (* t -> Core__.Import.Time.Span.t -> t *)
   |> python_of_core__core_time_float__t
 ;;
 
-let sub () = (* t -> Core__.Import.Time.Span.t -> t *)
+let sub () = (* Core__Core_time_float.t -> Core__.Import.Time.Span.t -> Core__Core_time_float.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     positional_2 = positional "positional_2" param_core____import__time__span__t ~docstring:"Core__.Import.Time.Span.t"
   in
   Core__Core_time_float.sub
@@ -2168,10 +2168,10 @@ let sub () = (* t -> Core__.Import.Time.Span.t -> t *)
   |> python_of_core__core_time_float__t
 ;;
 
-let diff () = (* t -> t -> Core__.Import.Time.Span.t *)
+let diff () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> Core__.Import.Time.Span.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.diff
     positional_1
@@ -2179,10 +2179,10 @@ let diff () = (* t -> t -> Core__.Import.Time.Span.t *)
   |> python_of_core____import__time__span__t
 ;;
 
-let abs_diff () = (* t -> t -> Core__.Import.Time.Span.t *)
+let abs_diff () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> Core__.Import.Time.Span.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.abs_diff
     positional_1
@@ -2190,10 +2190,10 @@ let abs_diff () = (* t -> t -> Core__.Import.Time.Span.t *)
   |> python_of_core____import__time__span__t
 ;;
 
-let is_earlier () = (* t -> t -> bool *)
+let is_earlier () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    than = keyword "than" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    than = keyword "than" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.is_earlier
     positional_1
@@ -2201,10 +2201,10 @@ let is_earlier () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let is_later () = (* t -> t -> bool *)
+let is_later () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    than = keyword "than" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    than = keyword "than" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.is_later
     positional_1
@@ -2212,7 +2212,7 @@ let is_later () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let of_date_ofday () = (* Core_kernel__.Zone.t -> Core_kernel__.Time_intf.Date.t -> Core__.Import.Time.Ofday.t -> t *)
+let of_date_ofday () = (* Core_kernel__.Zone.t -> Core_kernel__.Time_intf.Date.t -> Core__.Import.Time.Ofday.t -> Core__Core_time_float.t *)
   let%map_open
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t" and
     positional_2 = positional "positional_2" param_core_kernel____time_intf__date__t ~docstring:"Core_kernel__.Time_intf.Date.t" and
@@ -2225,9 +2225,9 @@ let of_date_ofday () = (* Core_kernel__.Zone.t -> Core_kernel__.Time_intf.Date.t
   |> python_of_core__core_time_float__t
 ;;
 
-let to_date_ofday () = (* t -> Core_kernel__.Zone.t -> (Core_kernel__.Time_intf.Date.t, Core__.Import.Time.Ofday.t) *)
+let to_date_ofday () = (* Core__Core_time_float.t -> Core_kernel__.Zone.t -> (Core_kernel__.Time_intf.Date.t, Core__.Import.Time.Ofday.t) *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t"
   in
   Core__Core_time_float.to_date_ofday
@@ -2236,9 +2236,9 @@ let to_date_ofday () = (* t -> Core_kernel__.Zone.t -> (Core_kernel__.Time_intf.
   |> (fun (t0, t1) -> Py.Tuple.of_list [python_of_core_kernel____time_intf__date__t t0; python_of_core____import__time__ofday__t t1])
 ;;
 
-let to_date () = (* t -> Core_kernel__.Zone.t -> Core_kernel__.Time_intf.Date.t *)
+let to_date () = (* Core__Core_time_float.t -> Core_kernel__.Zone.t -> Core_kernel__.Time_intf.Date.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t"
   in
   Core__Core_time_float.to_date
@@ -2247,9 +2247,9 @@ let to_date () = (* t -> Core_kernel__.Zone.t -> Core_kernel__.Time_intf.Date.t 
   |> python_of_core_kernel____time_intf__date__t
 ;;
 
-let to_ofday () = (* t -> Core_kernel__.Zone.t -> Core__.Import.Time.Ofday.t *)
+let to_ofday () = (* Core__Core_time_float.t -> Core_kernel__.Zone.t -> Core__.Import.Time.Ofday.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t"
   in
   Core__Core_time_float.to_ofday
@@ -2262,7 +2262,7 @@ let reset_date_cache () = (* unit -> unit *)
   Defunc.no_arg (fun () -> Core__Core_time_float.reset_date_cache () |> python_of_unit)
 ;;
 
-let epoch () = (* t *)
+let epoch () = (* Core__Core_time_float.t *)
   Defunc.no_arg (fun () -> Core__Core_time_float.epoch |> python_of_core__core_time_float__t)
 ;;
 
@@ -2281,9 +2281,9 @@ let convert () = (* Core_kernel__.Zone.t -> Core_kernel__.Zone.t -> Core_kernel_
   |> (fun (t0, t1) -> Py.Tuple.of_list [python_of_core_kernel____time_intf__date__t t0; python_of_core____import__time__ofday__t t1])
 ;;
 
-let utc_offset () = (* t -> Core_kernel__.Zone.t -> Core__.Import.Time.Span.t *)
+let utc_offset () = (* Core__Core_time_float.t -> Core_kernel__.Zone.t -> Core__.Import.Time.Span.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t"
   in
   Core__Core_time_float.utc_offset
@@ -2292,9 +2292,9 @@ let utc_offset () = (* t -> Core_kernel__.Zone.t -> Core__.Import.Time.Span.t *)
   |> python_of_core____import__time__span__t
 ;;
 
-let to_filename_string () = (* t -> Core_kernel__.Zone.t -> string *)
+let to_filename_string () = (* Core__Core_time_float.t -> Core_kernel__.Zone.t -> string *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t"
   in
   Core__Core_time_float.to_filename_string
@@ -2303,7 +2303,7 @@ let to_filename_string () = (* t -> Core_kernel__.Zone.t -> string *)
   |> python_of_string
 ;;
 
-let of_filename_string () = (* string -> Core_kernel__.Zone.t -> t *)
+let of_filename_string () = (* string -> Core_kernel__.Zone.t -> Core__Core_time_float.t *)
   let%map_open
     positional_1 = positional "positional_1" string ~docstring:"string" and
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t"
@@ -2314,9 +2314,9 @@ let of_filename_string () = (* string -> Core_kernel__.Zone.t -> t *)
   |> python_of_core__core_time_float__t
 ;;
 
-let to_string_abs () = (* t -> Core_kernel__.Zone.t -> string *)
+let to_string_abs () = (* Core__Core_time_float.t -> Core_kernel__.Zone.t -> string *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t"
   in
   Core__Core_time_float.to_string_abs
@@ -2325,9 +2325,9 @@ let to_string_abs () = (* t -> Core_kernel__.Zone.t -> string *)
   |> python_of_string
 ;;
 
-let to_string_abs_trimmed () = (* t -> Core_kernel__.Zone.t -> string *)
+let to_string_abs_trimmed () = (* Core__Core_time_float.t -> Core_kernel__.Zone.t -> string *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t"
   in
   Core__Core_time_float.to_string_abs_trimmed
@@ -2336,9 +2336,9 @@ let to_string_abs_trimmed () = (* t -> Core_kernel__.Zone.t -> string *)
   |> python_of_string
 ;;
 
-let to_string_abs_parts () = (* t -> Core_kernel__.Zone.t -> string list *)
+let to_string_abs_parts () = (* Core__Core_time_float.t -> Core_kernel__.Zone.t -> string list *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t"
   in
   Core__Core_time_float.to_string_abs_parts
@@ -2347,9 +2347,9 @@ let to_string_abs_parts () = (* t -> Core_kernel__.Zone.t -> string list *)
   |> (python_of_list python_of_string)
 ;;
 
-let to_string_trimmed () = (* t -> Core_kernel__.Zone.t -> string *)
+let to_string_trimmed () = (* Core__Core_time_float.t -> Core_kernel__.Zone.t -> string *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t"
   in
   Core__Core_time_float.to_string_trimmed
@@ -2358,9 +2358,9 @@ let to_string_trimmed () = (* t -> Core_kernel__.Zone.t -> string *)
   |> python_of_string
 ;;
 
-let to_sec_string () = (* t -> Core_kernel__.Zone.t -> string *)
+let to_sec_string () = (* Core__Core_time_float.t -> Core_kernel__.Zone.t -> string *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t"
   in
   Core__Core_time_float.to_sec_string
@@ -2369,7 +2369,7 @@ let to_sec_string () = (* t -> Core_kernel__.Zone.t -> string *)
   |> python_of_string
 ;;
 
-let of_localized_string () = (* Core_kernel__.Zone.t -> string -> t *)
+let of_localized_string () = (* Core_kernel__.Zone.t -> string -> Core__Core_time_float.t *)
   let%map_open
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t" and
     positional_2 = positional "positional_2" string ~docstring:"string"
@@ -2380,9 +2380,9 @@ let of_localized_string () = (* Core_kernel__.Zone.t -> string -> t *)
   |> python_of_core__core_time_float__t
 ;;
 
-let to_string_iso8601_basic () = (* t -> Core_kernel__.Zone.t -> string *)
+let to_string_iso8601_basic () = (* Core__Core_time_float.t -> Core_kernel__.Zone.t -> string *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     zone = keyword "zone" param_core_kernel____zone__t ~docstring:"Core_kernel__.Zone.t"
   in
   Core__Core_time_float.to_string_iso8601_basic
@@ -2395,7 +2395,7 @@ let bin_shape_t () = (* Bin_prot.Shape.t *)
   Defunc.no_arg (fun () -> Core__Core_time_float.bin_shape_t |> python_of_bin_prot__shape__t)
 ;;
 
-let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
+let t_of_sexp () = (* Sexplib0.Sexp.t -> Core__Core_time_float.t *)
   let%map_open
     positional_1 = positional "positional_1" param_sexplib0__sexp__t ~docstring:"Sexplib0.Sexp.t"
   in
@@ -2404,16 +2404,16 @@ let t_of_sexp () = (* Sexplib0.Sexp.t -> t *)
   |> python_of_core__core_time_float__t
 ;;
 
-let sexp_of_t () = (* t -> Ppx_sexp_conv_lib.Sexp.t *)
+let sexp_of_t () = (* Core__Core_time_float.t -> Ppx_sexp_conv_lib.Sexp.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.sexp_of_t
     positional_1
   |> python_of_ppx_sexp_conv_lib__sexp__t
 ;;
 
-let of_string () = (* string -> t *)
+let of_string () = (* string -> Core__Core_time_float.t *)
   let%map_open
     positional_1 = positional "positional_1" string ~docstring:"string"
   in
@@ -2422,19 +2422,19 @@ let of_string () = (* string -> t *)
   |> python_of_core__core_time_float__t
 ;;
 
-let to_string () = (* t -> string *)
+let to_string () = (* Core__Core_time_float.t -> string *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.to_string
     positional_1
   |> python_of_string
 ;;
 
-let pp () = (* Base__.Formatter.t -> t -> unit *)
+let pp () = (* Base__.Formatter.t -> Core__Core_time_float.t -> unit *)
   let%map_open
     positional_1 = positional "positional_1" param_base____formatter__t ~docstring:"Base__.Formatter.t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.pp
     positional_1
@@ -2442,10 +2442,10 @@ let pp () = (* Base__.Formatter.t -> t -> unit *)
   |> python_of_unit
 ;;
 
-let greatereq () = (* t -> t -> bool *)
+let greatereq () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.(>=)
     positional_1
@@ -2453,10 +2453,10 @@ let greatereq () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let lowereq () = (* t -> t -> bool *)
+let lowereq () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.(<=)
     positional_1
@@ -2464,10 +2464,10 @@ let lowereq () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let eq () = (* t -> t -> bool *)
+let eq () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.(=)
     positional_1
@@ -2475,10 +2475,10 @@ let eq () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let greater () = (* t -> t -> bool *)
+let greater () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.(>)
     positional_1
@@ -2486,10 +2486,10 @@ let greater () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let lower () = (* t -> t -> bool *)
+let lower () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.(<)
     positional_1
@@ -2497,10 +2497,10 @@ let lower () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let neq () = (* t -> t -> bool *)
+let neq () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.(<>)
     positional_1
@@ -2508,10 +2508,10 @@ let neq () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let equal () = (* t -> t -> bool *)
+let equal () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.equal
     positional_1
@@ -2519,10 +2519,10 @@ let equal () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let compare () = (* t -> t -> int *)
+let compare () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> int *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.compare
     positional_1
@@ -2530,10 +2530,10 @@ let compare () = (* t -> t -> int *)
   |> python_of_int
 ;;
 
-let min () = (* t -> t -> t *)
+let min () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> Core__Core_time_float.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.min
     positional_1
@@ -2541,10 +2541,10 @@ let min () = (* t -> t -> t *)
   |> python_of_core__core_time_float__t
 ;;
 
-let max () = (* t -> t -> t *)
+let max () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> Core__Core_time_float.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.max
     positional_1
@@ -2552,10 +2552,10 @@ let max () = (* t -> t -> t *)
   |> python_of_core__core_time_float__t
 ;;
 
-let ascending () = (* t -> t -> int *)
+let ascending () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> int *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.ascending
     positional_1
@@ -2563,10 +2563,10 @@ let ascending () = (* t -> t -> int *)
   |> python_of_int
 ;;
 
-let descending () = (* t -> t -> int *)
+let descending () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> int *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.descending
     positional_1
@@ -2574,11 +2574,11 @@ let descending () = (* t -> t -> int *)
   |> python_of_int
 ;;
 
-let between () = (* t -> t -> t -> bool *)
+let between () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    low = keyword "low" param_core__core_time_float__t ~docstring:"t" and
-    high = keyword "high" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    low = keyword "low" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    high = keyword "high" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.between
     positional_1
@@ -2587,11 +2587,11 @@ let between () = (* t -> t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let clamp_exn () = (* t -> t -> t -> t *)
+let clamp_exn () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> Core__Core_time_float.t -> Core__Core_time_float.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    min = keyword "min" param_core__core_time_float__t ~docstring:"t" and
-    max = keyword "max" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    min = keyword "min" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    max = keyword "max" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.clamp_exn
     positional_1
@@ -2600,10 +2600,10 @@ let clamp_exn () = (* t -> t -> t -> t *)
   |> python_of_core__core_time_float__t
 ;;
 
-let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Hash.state *)
+let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> Core__Core_time_float.t -> Ppx_hash_lib.Std.Hash.state *)
   let%map_open
     positional_1 = positional "positional_1" param_ppx_hash_lib__std__hash__state ~docstring:"Ppx_hash_lib.Std.Hash.state" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.hash_fold_t
     positional_1
@@ -2611,9 +2611,9 @@ let hash_fold_t () = (* Ppx_hash_lib.Std.Hash.state -> t -> Ppx_hash_lib.Std.Has
   |> python_of_ppx_hash_lib__std__hash__state
 ;;
 
-let hash () = (* t -> Ppx_hash_lib.Std.Hash.hash_value *)
+let hash () = (* Core__Core_time_float.t -> Ppx_hash_lib.Std.Hash.hash_value *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.hash
     positional_1
@@ -2633,10 +2633,10 @@ let set_sexp_zone () = (* Zone.t -> unit *)
   |> python_of_unit
 ;;
 
-let greatereq_approx () = (* t -> t -> bool *)
+let greatereq_approx () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.(>=.)
     positional_1
@@ -2644,10 +2644,10 @@ let greatereq_approx () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let lowereq_approx () = (* t -> t -> bool *)
+let lowereq_approx () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.(<=.)
     positional_1
@@ -2655,10 +2655,10 @@ let lowereq_approx () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let eq_approx () = (* t -> t -> bool *)
+let eq_approx () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.(=.)
     positional_1
@@ -2666,10 +2666,10 @@ let eq_approx () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let greater_approx () = (* t -> t -> bool *)
+let greater_approx () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.(>.)
     positional_1
@@ -2677,10 +2677,10 @@ let greater_approx () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let lower_approx () = (* t -> t -> bool *)
+let lower_approx () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.(<.)
     positional_1
@@ -2688,10 +2688,10 @@ let lower_approx () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let neq_approx () = (* t -> t -> bool *)
+let neq_approx () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> bool *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.(<>.)
     positional_1
@@ -2699,10 +2699,10 @@ let neq_approx () = (* t -> t -> bool *)
   |> python_of_bool
 ;;
 
-let robustly_compare () = (* t -> t -> int *)
+let robustly_compare () = (* Core__Core_time_float.t -> Core__Core_time_float.t -> int *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
-    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"t"
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
+    positional_2 = positional "positional_2" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t"
   in
   Core__Core_time_float.robustly_compare
     positional_1
@@ -2710,7 +2710,7 @@ let robustly_compare () = (* t -> t -> int *)
   |> python_of_int
 ;;
 
-let of_tm () = (* Core__.Core_unix.tm -> Zone.t -> t *)
+let of_tm () = (* Core__.Core_unix.tm -> Zone.t -> Core__Core_time_float.t *)
   let%map_open
     positional_1 = positional "positional_1" param_core____core_unix__tm ~docstring:"Core__.Core_unix.tm" and
     zone = keyword "zone" param_zone__t ~docstring:"Zone.t"
@@ -2721,7 +2721,7 @@ let of_tm () = (* Core__.Core_unix.tm -> Zone.t -> t *)
   |> python_of_core__core_time_float__t
 ;;
 
-let of_string_abs () = (* string -> t *)
+let of_string_abs () = (* string -> Core__Core_time_float.t *)
   let%map_open
     positional_1 = positional "positional_1" string ~docstring:"string"
   in
@@ -2730,7 +2730,7 @@ let of_string_abs () = (* string -> t *)
   |> python_of_core__core_time_float__t
 ;;
 
-let t_of_sexp_abs () = (* Core__.Import.Sexp.t -> t *)
+let t_of_sexp_abs () = (* Core__.Import.Sexp.t -> Core__Core_time_float.t *)
   let%map_open
     positional_1 = positional "positional_1" param_core____import__sexp__t ~docstring:"Core__.Import.Sexp.t"
   in
@@ -2739,9 +2739,9 @@ let t_of_sexp_abs () = (* Core__.Import.Sexp.t -> t *)
   |> python_of_core__core_time_float__t
 ;;
 
-let sexp_of_t_abs () = (* t -> Zone.t -> Core__.Import.Sexp.t *)
+let sexp_of_t_abs () = (* Core__Core_time_float.t -> Zone.t -> Core__.Import.Sexp.t *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     zone = keyword "zone" param_zone__t ~docstring:"Zone.t"
   in
   Core__Core_time_float.sexp_of_t_abs
@@ -2763,9 +2763,9 @@ let pause_forever () = (* unit -> Core__.Import.never_returns *)
   Defunc.no_arg (fun () -> Core__Core_time_float.pause_forever () |> python_of_core____import__never_returns)
 ;;
 
-let format () = (* t -> string -> Zone.t -> string *)
+let format () = (* Core__Core_time_float.t -> string -> Zone.t -> string *)
   let%map_open
-    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"t" and
+    positional_1 = positional "positional_1" param_core__core_time_float__t ~docstring:"Core__Core_time_float.t" and
     positional_2 = positional "positional_2" string ~docstring:"string" and
     zone = keyword "zone" param_zone__t ~docstring:"Zone.t"
   in
@@ -2776,7 +2776,7 @@ let format () = (* t -> string -> Zone.t -> string *)
   |> python_of_string
 ;;
 
-let parse () = (* string -> string -> Zone.t -> t *)
+let parse () = (* string -> string -> Zone.t -> Core__Core_time_float.t *)
   let%map_open
     positional_1 = positional "positional_1" string ~docstring:"string" and
     fmt = keyword "fmt" string ~docstring:"string" and

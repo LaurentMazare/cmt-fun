@@ -8,7 +8,7 @@ module Arg : sig
 end
 
 type t =
-  | Atom of string
+  | Atom of Module_env.P.t * string
   | Tuple2 of t * t
   | Tuple3 of t * t * t
   | Tuple4 of t * t * t * t
@@ -17,5 +17,5 @@ type t =
   | Apply of t * string
 
 val uncurrify : t -> (Arg.t * t) list * t
-val of_type_desc : Types.type_desc -> t Or_error.t
+val of_type_desc : Types.type_desc -> env:Module_env.t -> t Or_error.t
 val to_string : t -> string

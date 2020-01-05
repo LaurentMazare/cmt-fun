@@ -8,7 +8,7 @@ module Arg = struct
 end
 
 type t =
-  | Atom of string
+  | Atom of Module_env.P.t * string
   | Tuple2 of t * t
   | Tuple3 of t * t * t
   | Tuple4 of t * t * t * t
@@ -22,7 +22,7 @@ let basic_constr0 =
 
 let supported_constr1 = Set.of_list (module String) [ "list"; "array" ]
 
-let of_type_desc type_desc =
+let of_type_desc type_desc ~env =
   let open Or_error.Let_syntax in
   let rec walk (type_desc : Types.type_desc) =
     match type_desc with
@@ -52,7 +52,20 @@ let of_type_desc type_desc =
       Ok (Arrow (kind, e1, e2))
     | Tconstr (constr, [], _) ->
       let last = Path.last constr in
-      if Set.mem basic_constr0 last then Ok (Atom last) else Ok (Atom (Path.name constr))
+      if Set.mem basic_constr0 last
+      then Ok (Atom (Module_env.P.empty, last))
+      else (
+        match Path.flatten constr with
+        | `Contains_apply -> Or_error.errorf "contains apply %s" (Path.name constr)
+        | `Ok (type_name, []) ->
+          let type_name = Ident.name type_name in
+          let path =
+            Module_env.find_type env ~type_name
+            |> Option.value ~default:Module_env.P.empty
+          in
+          Ok (Atom (path, type_name))
+        | `Ok (_module_name, _name_list) ->
+          (* TODO *) Ok (Atom (Module_env.P.empty, Path.name constr)))
     | Tconstr (constr, [ param ], _) ->
       let%bind param = walk param.desc in
       let last = Path.last constr in
@@ -76,7 +89,10 @@ let to_string t =
     | Tuple3 (t1, t2, t3) -> tuple [ t1; t2; t3 ]
     | Tuple4 (t1, t2, t3, t4) -> tuple [ t1; t2; t3; t4 ]
     | Tuple5 (t1, t2, t3, t4, t5) -> tuple [ t1; t2; t3; t4; t5 ]
-    | Atom name -> name
+    | Atom (path, name) ->
+      (match Module_env.P.names path with
+      | [] -> name
+      | _ :: _ as path -> String.concat path ~sep:"." ^ "." ^ name)
     | Apply (param, name) ->
       if need_parenthesis param
       then Printf.sprintf "(%s) %s" (walk param) name

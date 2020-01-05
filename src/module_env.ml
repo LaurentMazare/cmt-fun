@@ -17,19 +17,30 @@ end
 type t =
   { path : P.t
   ; types : string Hash_set.t
+  ; modules : (string, t) Hashtbl.t
   ; parent : t option
   }
 
 let path t = t.path
-let create () = { path = P.empty; types = Hash_set.create (module String); parent = None }
 
-let enter_module t ~module_name =
-  { path = P.append t.path module_name
+let create () =
+  { path = P.empty
   ; types = Hash_set.create (module String)
-  ; parent = Some t
+  ; modules = Hashtbl.create (module String)
+  ; parent = None
   }
 
-let exit_module t = t.parent
+let enter_module t ~module_name =
+  let module_t =
+    { path = P.append t.path module_name
+    ; types = Hash_set.create (module String)
+    ; modules = Hashtbl.create (module String)
+    ; parent = Some t
+    }
+  in
+  Hashtbl.set t.modules ~key:module_name ~data:module_t;
+  module_t
+
 let add_type t ~type_name = Hash_set.add t.types type_name
 
 let find_type t ~type_name =
