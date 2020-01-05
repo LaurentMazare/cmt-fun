@@ -59,28 +59,25 @@ let ops =
 (* TODO: store all calls to this function to generate the python_of_ and param_
    part of the bindings.
 *)
-let escape str ~env =
-  let name =
-    match Module_env.find_type env ~type_name:str with
-    | None -> str
-    | Some path ->
-      Module_env.P.append path str |> Module_env.P.names |> String.concat ~sep:"."
-  in
-  String.substr_replace_all name ~pattern:"." ~with_:"__" |> String.lowercase
+let escape str ~path =
+  Module_env.P.append path str
+  |> Module_env.P.names
+  |> String.concat ~sep:"."
+  |> String.substr_replace_all ~pattern:"." ~with_:"__"
+  |> String.lowercase
 
 let python_name s = Map.find ops s |> Option.value ~default:s
 let ocaml_name s = if Map.mem ops s then "(" ^ s ^ ")" else s
 
-let python_of_simple_type st ~env =
+let python_of_simple_type st =
   let rec walk : Simple_type.t -> string = function
     | Arrow _ -> failwith "TODO"
     | Tuple2 (t1, t2) -> tuple [ t1; t2 ]
     | Tuple3 (t1, t2, t3) -> tuple [ t1; t2; t3 ]
     | Tuple4 (t1, t2, t3, t4) -> tuple [ t1; t2; t3; t4 ]
     | Tuple5 (t1, t2, t3, t4, t5) -> tuple [ t1; t2; t3; t4; t5 ]
-    | Atom (_, constr) -> "python_of_" ^ escape constr ~env
-    | Apply (t, constr) ->
-      Printf.sprintf "(python_of_%s %s)" (escape constr ~env) (walk t)
+    | Atom (path, constr) -> "python_of_" ^ escape constr ~path
+    | Apply (t, constr) -> Printf.sprintf "(python_of_%s %s)" constr (walk t)
   and tuple ts =
     let names = List.mapi ts ~f:(fun i t -> Printf.sprintf "t%d" i, t) in
     Printf.sprintf
@@ -115,7 +112,7 @@ let write_value ident value_description outc ~indent ~env =
         "  Defunc.no_arg (fun () -> %s.%s () |> %s)"
         path_str
         ocaml_name
-        (python_of_simple_type result ~env)
+        (python_of_simple_type result)
     | (_ :: _ as args), result ->
       pr "  let%%map_open";
       let args =
@@ -156,8 +153,8 @@ let write_value ident value_description outc ~indent ~env =
             in
             let rec walk t =
               match (t : Simple_type.t) with
-              | Atom (_, a) ->
-                if Set.mem direct_params a then a else "param_" ^ escape a ~env
+              | Atom (path, a) ->
+                if Set.mem direct_params a then a else "param_" ^ escape a ~path
               | Tuple2 (t1, t2) -> Printf.sprintf "pair (%s) (%s)" (walk t1) (walk t2)
               | Tuple3 (t1, t2, t3) ->
                 Printf.sprintf "triple (%s) (%s) (%s)" (walk t1) (walk t2) (walk t3)
@@ -187,13 +184,13 @@ let write_value ident value_description outc ~indent ~env =
             | `skip_unit -> "()"
           in
           pr "    %s" name);
-      pr "  |> %s" (python_of_simple_type result ~env)
+      pr "  |> %s" (python_of_simple_type result)
     | [], _ ->
       pr
         "  Defunc.no_arg (fun () -> %s.%s |> %s)"
         path_str
         ocaml_name
-        (python_of_simple_type simple_type ~env));
+        (python_of_simple_type simple_type));
     pr ";;";
     pr "";
     Function python_name
