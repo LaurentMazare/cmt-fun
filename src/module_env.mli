@@ -13,3 +13,4 @@ val path : t -> P.t
 val enter_module : t -> module_name:string -> t
 val add_type : t -> type_name:string -> unit
 val find_type : t -> type_name:string -> P.t option
+val find_module : t -> module_name:string -> P.t option

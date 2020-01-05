@@ -64,8 +64,20 @@ let of_type_desc type_desc ~env =
             |> Option.value ~default:Module_env.P.empty
           in
           Ok (Atom (path, type_name))
-        | `Ok (_module_name, _name_list) ->
-          (* TODO *) Ok (Atom (Module_env.P.empty, Path.name constr)))
+        | `Ok (module_name, name_list) ->
+          let module_name = Ident.name module_name in
+          let path =
+            Module_env.find_module env ~module_name
+            |> Option.value ~default:Module_env.P.empty
+          in
+          let path = Module_env.P.append path module_name in
+          let rec walk path = function
+            | [] -> assert false
+            | [ type_name ] -> path, type_name
+            | p :: q -> walk (Module_env.P.append path p) q
+          in
+          let path, type_name = walk path name_list in
+          Ok (Atom (path, type_name)))
     | Tconstr (constr, [ param ], _) ->
       let%bind param = walk param.desc in
       let last = Path.last constr in

@@ -53,3 +53,14 @@ let find_type t ~type_name =
       | Some parent -> walk parent)
   in
   walk t
+
+let find_module t ~module_name =
+  let rec walk t =
+    if Hashtbl.mem t.modules module_name
+    then Some t.path
+    else (
+      match t.parent with
+      | None -> None
+      | Some parent -> walk parent)
+  in
+  walk t
